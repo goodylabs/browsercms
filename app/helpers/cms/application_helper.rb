@@ -177,11 +177,12 @@ HTML
             :previous_page_path => engine(content_type).url_for({:page => collection.previous_page ? collection.previous_page : 1}.merge(options)),
             :current_page_path => engine(content_type).url_for(options),
             :next_page_path => engine(content_type).url_for({:page => collection.next_page ? collection.next_page : collection.current_page}.merge(options)),
-            :last_page_path => engine(content_type).url_for({:page => collection.total_pages}.merge(options))
+            :last_page_path => engine(content_type).url_for({:page => collection.total_pages}.merge(options)),
+            :content_type => content_type
         }
       end
     end
-      
+
     def url_with_mode(url, mode)
       url = "" unless url # Handles cases where request.referrer is nil (see cms/_page_toolbar.html.erb for an example)
       uri = URI.parse(url)
