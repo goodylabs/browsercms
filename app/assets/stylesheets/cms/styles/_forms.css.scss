@@ -226,6 +226,16 @@ textarea::-webkit-input-placeholder {
   	@include rem(margin-top,0.25rem);
 }
 
+.checkbox.checkbox{
+  padding-left: 1.5rem;
+  float: none;
+  display: block;
+  clear: both;
+  label {
+    width: 100%;
+  }
+}
+
 .controls > .radio:first-child,
 .controls > .checkbox:first-child {
   	@include rem(padding-top, 0.6rem);
