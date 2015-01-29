@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency("ckeditor_rails", "~> 4.3.0")
   s.add_dependency("underscore-rails", "~> 1.4")
   s.add_dependency("jquery-rails", "~> 3.1")
-  s.add_dependency("jquery-ui-rails", "~> 4.1")
+  s.add_dependency("jquery-ui-rails", "~> 5.0.3")
   s.add_dependency("paperclip", "~> 3.4")
   s.add_dependency("panoramic")
   s.add_dependency("will_paginate", "~>3.0.0")
