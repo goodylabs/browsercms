@@ -175,6 +175,7 @@ module Cms
       options[:page] = params[:page]
       options[:order] = model_class.default_order if model_class.respond_to?(:default_order)
       options[:order] = params[:order] unless params[:order].blank?
+      options[:limit] = model_class.limit if model_class.respond_to?(:limit)
 
       scope = model_class.respond_to?(:list) ? model_class.list : model_class
       if scope.searchable?
@@ -183,6 +184,7 @@ module Cms
       if params[:section_id] && model_class.respond_to?(:with_parent_id)
         scope = scope.with_parent_id(params[:section_id])
       end
+
       @total_number_of_items = scope.count
       @blocks = scope.paginate(options)
       check_permissions
