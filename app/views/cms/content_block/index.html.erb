@@ -52,7 +52,7 @@
           <% end %>
         </tr>
         </thead>
-        <% jquery_sortable = content_type.model_class.respond_to?(:acts_as_list) ? "sorted_table" : "" %>
+        <% jquery_sortable = content_type.model_class.respond_to?(:sortable_dragable) ? "sorted_table" : "" %>
         <tbody class="<%= jquery_sortable %>" data-sort-url="<%= polymorphic_path(build_path_for(content_type.model_class), {action: :sort}) %>">
         <% @blocks.each_with_index do |block| %>
             <tr id="<%= dom_id(block) %>">
