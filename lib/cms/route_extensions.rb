@@ -19,6 +19,7 @@ module Cms::RouteExtensions
       end
       collection do
         put :update, to: "#{content_block_name}#bulk_update"
+        post :sort if model_class.respond_to?(:acts_as_list)
       end
     end
   end

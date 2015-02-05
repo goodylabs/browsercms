@@ -52,10 +52,10 @@
           <% end %>
         </tr>
         </thead>
-
-        <tbody>
-        <% @blocks.each do |block| %>
-            <tr>
+        <% jquery_sortable = content_type.model_class.respond_to?(:acts_as_list) ? "sorted_table" : "" %>
+        <tbody class="<%= jquery_sortable %>" data-sort-url="<%= polymorphic_path(build_path_for(content_type.model_class), {action: :sort}) %>">
+        <% @blocks.each_with_index do |block| %>
+            <tr id="<%= dom_id(block) %>">
               <td class="check-cell"><%= check_box_tag 'content_id[]', block.id %></td>
               <% content_type.columns_for_index.each_with_index do |column, i| %>
                   <td>

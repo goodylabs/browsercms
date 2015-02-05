@@ -142,6 +142,13 @@ module Cms
       new_engine_aware_path(content_type)
     end
 
+    def sort
+      params[resource_param].each_with_index do |id, index|
+        model_class.update_all({position: index+1}, {id: id})
+      end
+      render :json => {:success => true, :message => "List updated"}
+    end
+
     protected
 
     def content_type_name
@@ -175,7 +182,7 @@ module Cms
       options[:page] = params[:page]
       options[:order] = model_class.default_order if model_class.respond_to?(:default_order)
       options[:order] = params[:order] unless params[:order].blank?
-      options[:limit] = model_class.limit if model_class.respond_to?(:limit)
+      options[:limit] = model_class.elements_per_page if model_class.respond_to?(:elements_per_page)
 
       scope = model_class.respond_to?(:list) ? model_class.list : model_class
       if scope.searchable?
