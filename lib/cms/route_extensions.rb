@@ -16,6 +16,7 @@ module Cms::RouteExtensions
           get 'version/:version', to: "#{content_block_name}#version", as: 'version'
           put 'revert_to/:version', to: "#{content_block_name}#revert_to", as: 'revert'
         end
+        get :clone_record if model_class.respond_to?(:amoeba) && model_class.amoeba.enabled
       end
       collection do
         put :update, to: "#{content_block_name}#bulk_update"

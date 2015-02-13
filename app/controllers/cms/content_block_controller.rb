@@ -149,6 +149,14 @@ module Cms
       render :json => {:success => true, :message => "List updated"}
     end
 
+    def clone_record
+      old_record = model_class.find(params[:id])
+      new_record = old_record.amoeba_dup
+      new_record.save
+      flash[:notice] = "#{content_type.display_name} was clonned"
+      redirect_to engine_aware_path(new_record)
+    end
+
     protected
 
     def content_type_name
