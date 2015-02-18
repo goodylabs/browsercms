@@ -100,6 +100,12 @@ dl {
 		display: block;
 		width: 70%;
 		float: left;
+
+		&:after {
+		  display: table;
+		  content: "";
+		  clear: both;
+		}
 	}
 
 	&:after {
@@ -112,4 +118,5 @@ dl {
 		width: 0;
 		height: 0;
 	}
+
 }
