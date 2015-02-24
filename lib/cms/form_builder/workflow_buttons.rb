@@ -7,7 +7,9 @@ module Cms
     end
 
     def save_draft(*args, &block)
-      button_with_normalized_options(args, "Save Draft")
+      button_with_normalized_options(args, "Save Draft") do |opts|
+        opts[:class] << "btn-primary right"
+      end
     end
 
     def save(*args, &block)
