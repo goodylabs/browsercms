@@ -279,6 +279,7 @@ module Cms
     def update_block
       load_block
       @block.update_attributes(model_params())
+      do_command("published") { @block.publish! } if model_params['publish_on_save']
     end
 
     # Returns the parameters for the block to be saved.
