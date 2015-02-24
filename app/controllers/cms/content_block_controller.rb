@@ -152,7 +152,7 @@ module Cms
     def clone_record
       old_record = model_class.find(params[:id])
       new_record = old_record.amoeba_dup
-      new_record.save
+      new_record.save_draft
       flash[:notice] = "#{content_type.display_name} was clonned"
       redirect_to engine_aware_path(new_record)
     end
