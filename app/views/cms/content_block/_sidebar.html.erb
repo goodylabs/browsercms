@@ -28,6 +28,9 @@
     <%= link_to "View", engine_aware_path(@block), class: "btn btn-small" %>
     <%= link_to("Preview", @block.path, id: "preview_button", target: "_blank", class: "btn btn-small") if @block.class.addressable? %>
     <%= link_to "Versions", engine(@block).polymorphic_path([:versions, @block]), class: "btn btn-small" if @block.class.versioned? %>
+    <% if @block.class.respond_to?(:amoeba) && @block.class.amoeba.enabled %>
+      <%= link_to 'Clone', polymorphic_path(build_path_for(@block), { action: :clone_record }), class: 'btn btn-small' %>
+    <% end %>
   </div>
   <div class="btn-group">
     <%= link_to "Delete", engine_aware_path(@block), class: "btn btn-small btn-danger confirm_with_title http_delete", title: "Are you sure you want to delete this content?" %>

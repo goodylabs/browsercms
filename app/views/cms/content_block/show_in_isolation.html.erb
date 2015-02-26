@@ -6,9 +6,6 @@
     </div>
     <div class="btn-group">
       <%= link_to 'Edit', edit_engine_aware_path(@block), class: 'btn btn-primary btn-small' %>
-      <% if @block.class.respond_to?(:amoeba) && @block.class.amoeba.enabled %>
-        <%= link_to 'Clone', polymorphic_path(build_path_for(@block), { action: :clone_record }), class: 'btn btn-primary btn-small' %>
-      <% end %>
     </div>
   </div>
 <% end %>
