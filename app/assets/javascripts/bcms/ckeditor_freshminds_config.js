@@ -6,6 +6,8 @@ CKEDITOR.stylesSet.add( 'freshminds_styles', [
     { name: 'Section Content', element: 'p', attributes: {'class': 'gc-section-content'}},
     { name: 'More Link', element: 'a', attributes: {'class': 'gc-link-more'}},
     { name: 'Bullet List', element: 'li', attributes: {'class': 'gc-list-bulletpoint'}},
+    { name: 'Quote', element: 'p', attributes: {'class': 'gc-quote'}},
+
 ]);
 
 CKEDITOR.config.stylesSet = 'freshminds_styles';
