@@ -3,6 +3,7 @@ jQuery(document).ready(function(){
     containerSelector: 'table',
     itemPath: '> tbody',
     itemSelector: 'tr',
+    opacity: 0.75,
     axis: 'y',
     update: function() {
       jQuery.post(jQuery(this).data('sort-url'), jQuery(this).sortable('serialize'))
