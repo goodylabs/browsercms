@@ -6,6 +6,8 @@
       <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
   <% end %>
 </div>
+
+
 <%= form_tag engine_aware_path(@search_filter.path), method: :put do %>
     <div class="padded row-fluid clearfix">
       <div class="btn-group span3 top-buttons">
@@ -26,6 +28,35 @@
         <h4 class="right"><%= @total_number_of_items %> ITEMS</h4>
     </span>
     </div>
+
+
+    <%- if content_type.model_class.new.respond_to?(:on_homepage) || content_type.model_class.new.respond_to?(:featured) %>
+      <div class="padded row-fluid clearfix">
+        <p>
+          Drag and drop items. They will finaly be ordered in the order presented below. Item position is only take under consideration within the same item type groups.
+        </p>
+        <table class="table table-bordered assets">
+          <tbody>
+            <%- if content_type.model_class.new.respond_to?(:on_homepage)%>
+              <tr class="on_homepage">
+                <td>On homepage</td>
+              </tr>
+            <% end %>
+            <%- if content_type.model_class.new.respond_to?(:featured) %>
+              <tr class="featured">
+                <td>Featured</td>
+              </tr>
+            <% end %>
+            <tr class="normal">
+              <td>Nor featured nor on homepage</td>
+            </tr>
+          </tbody>
+        <table>
+      </div>
+    <% end %>
+
+
+
 
     <div class="main-content padded row-fluid clearfix">
       <table class="table table-bordered assets">
