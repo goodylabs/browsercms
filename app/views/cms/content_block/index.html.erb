@@ -55,11 +55,21 @@
         <% jquery_sortable = content_type.model_class.respond_to?(:sortable_dragable) ? "sorted_table" : "" %>
         <tbody class="<%= jquery_sortable %>" data-sort-url="<%= polymorphic_path(build_path_for(content_type.model_class), {action: :sort}) %>">
         <% @blocks.each_with_index do |block| %>
-            <tr id="<%= dom_id(block) %>">
+            <%- clazz = "" %>
+            <%- if block.respond_to?(:on_homepage) && block.on_homepage %>
+              <%- clazz +=" on_homepage " %>
+            <% end %>
+            <%- if block.respond_to?(:featured) && block.featured %>
+              <%- clazz +=" featured " %>
+            <% end %>
+
+            <tr id="<%= dom_id(block) %>" class="<%= clazz %>">
               <td class="check-cell"><%= check_box_tag 'content_id[]', block.id %></td>
               <% content_type.columns_for_index.each_with_index do |column, i| %>
                   <td>
-                    <%= link_to_if(i == 0, block.send(column[:method]), edit_engine_aware_path(block)) %>
+                    <%- val = block.send(column[:method]) %>
+                    <%- val_type = val.class %>
+                    <%= link_to_if(i == 0, val, edit_engine_aware_path(block)) %>
                     <%= draft_icon_tag(block) if i == 0 %>
                   </td>
               <% end %>

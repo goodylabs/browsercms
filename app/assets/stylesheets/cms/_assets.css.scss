@@ -45,7 +45,12 @@
 	tbody {
 		tr {
 			position: relative;
-
+      &.featured {
+        background-color: #dfbd59;
+      }
+      &.on_homepage {
+        background-color: #339892;
+      }
 			&:hover {
 				background: rgba($gray,0.175);
 				cursor: pointer;
