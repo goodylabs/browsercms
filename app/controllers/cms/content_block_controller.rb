@@ -41,7 +41,7 @@ module Cms
         flash[:notice] = "Published #{published.size} records."
       end
 
-      redirect_to action: :index
+      redirect_to engine_aware_path(model_class)
     end
 
     # Getting content by its path  (i.e. /products/:slug)
