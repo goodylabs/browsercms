@@ -91,8 +91,10 @@ class Cms::Page < ActiveRecord::Base
 
 
   def setup_default_seo
-    self.description = "";
-    self.keywords = "";
+    unless SEOConfig.nil?
+      self.description =  SEOConfig.seo['description'];
+      self.keywords =  SEOConfig.seo['keywords'];
+    end
   end
 
   # Find the latest draft of a given page.
