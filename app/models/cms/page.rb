@@ -91,7 +91,7 @@ class Cms::Page < ActiveRecord::Base
 
 
   def setup_default_seo
-    unless SEOConfig.nil?
+    if !(SEOConfig.nil? || SEOConfig.seo.nil?)
       self.description =  SEOConfig.seo['description'];
       self.keywords =  SEOConfig.seo['keywords'];
     end
