@@ -81,12 +81,19 @@ class Cms::Page < ActiveRecord::Base
 
   before_validation :append_leading_slash_to_path, :remove_trailing_slash_from_path
   before_destroy :delete_connectors
+  after_initialize :setup_default_seo
 
   validates_presence_of :name, :path
 
   # Paths must be unique among undeleted records
   validates_uniqueness_of :path, :scope => :deleted
   validate :path_not_reserved
+
+
+  def setup_default_seo
+    self.description = "";
+    self.keywords = "";
+  end
 
   # Find the latest draft of a given page.
   #
