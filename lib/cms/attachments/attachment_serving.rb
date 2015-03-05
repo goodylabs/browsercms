@@ -51,10 +51,12 @@ module Cms
         if File.exists?(path_to_file)
           Rails.logger.debug "Sending file #{path_to_file}"
 
-          if Rails.env.production?
+          if !!Rails.configuration.cms.attachments.use_x_accel
             pretty_name = path_to_file.split('tmp/uploads/')[1]
             controller.headers['X-Accel-Redirect'] = x_accel_url(pretty_name)
-            controller.render( :nothing => true)
+            controller.headers['Content-type'] = attachment.file_type
+            controller.headers['Content-Disposition'] = "inline; filename=\"#{attachment.file_name}\""
+            controller.render( :nothing => true, :content_type => attachment.file_type  )
           else
             controller.send_file(path_to_file,
                                  :filename => attachment.file_name,
