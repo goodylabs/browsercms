@@ -37,17 +37,33 @@ module Cms
         Rails.configuration.cms.attachments.storage_directory
       end
 
+      def self.x_accel_url(file_name = nil)
+        # uri = "/internal_redirect/#{url.gsub('http://', '')}"
+        uri = "/download/"
+        uri << "#{file_name}" if file_name
+        return uri
+      end
+
       def self.send_attachment(attachment, controller)
         style = controller.params[:style]
         style = "original" unless style
         path_to_file = attachment.path(style)
         if File.exists?(path_to_file)
           Rails.logger.debug "Sending file #{path_to_file}"
-          controller.send_file(path_to_file,
-                               :filename => attachment.file_name,
-                               :type => attachment.file_type,
-                               :disposition => "inline"
-          )
+
+          if Rails.env.production?
+            pretty_name = path_to_file.split('tmp/uploads/')[1]
+            controller.headers['X-Accel-Redirect'] = x_accel_url(pretty_name)
+            controller.render( :nothing => true)
+          else
+            controller.send_file(path_to_file,
+                                 :filename => attachment.file_name,
+                                 :type => attachment.file_type,
+                                 :disposition => "inline"
+            )
+          end
+
+
         else
           msg = "Couldn't find file #{path_to_file}'"
           Rails.logger.error msg
