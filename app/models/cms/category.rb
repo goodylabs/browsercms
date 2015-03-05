@@ -23,6 +23,14 @@ module Cms
         .includes(:category_type)
         .references(:category_type)
       end
+
+      def of_type_with_custom_order(type_name, order_array)
+        where(["#{CategoryType.table_name}.name = ? AND #{Category.table_name}.id in (?)", type_name, order_array])
+        .order("field(#{Category.table_name}.id,#{order_array.join(',')})")
+        .includes(:category_type)
+        .references(:category_type)
+      end
+
     end
     scope :top_level, -> { where(["#{Category.table_name}.parent_id is null"]) }
     scope :list, -> { includes(:category_type) }

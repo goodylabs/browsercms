@@ -20,6 +20,7 @@ module Cms
     # Users can only download files if they have permission to view it.
     def download
       @attachment = Attachment.find(params[:id])
+      @attachment = @attachment.as_of_version(params[:version]) if params[:version]
       send_attachment(@attachment)
     end
 
