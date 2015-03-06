@@ -11,8 +11,9 @@ CKEDITOR.stylesSet.add( 'freshminds_styles', [
     { name: 'Bullet List', element: 'ul', attributes: {'class': 'gc-list'}},
     { name: 'Bullet List (collapsed)', element: 'ul', attributes: {'class': 'gc-list-collapsed'}},
     { name: 'Quote', element: 'blockquote', attributes: {'class': 'gc-quote'}}
-    
+
 
 ]);
 
 CKEDITOR.config.stylesSet = 'freshminds_styles';
+CKEDITOR.config.contentsCss = '/assets/ckeditor.css' ;            
