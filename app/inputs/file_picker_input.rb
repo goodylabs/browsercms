@@ -22,11 +22,13 @@ class FilePickerInput < SimpleForm::Inputs::Base
         html << template.content_tag(:span, "", {:class => "section_id_map", style: 'display: hidden', :data => {:id => s.id, :path => s.prependable_path}})
       end
     end
-    @builder.simple_fields_for :attachments do |a|
+    elements = @builder.object.attachments
+    elements = [ @builder.object.attachments.first ] if options[:one_file]
+    @builder.simple_fields_for :attachments, elements do |a|
       if matching_attachment?(a)
         html << a.hidden_field("attachment_name", value: attribute_name.to_s)
         html << a.file_field(:data, input_html_options.merge('data-purpose' => "cms_file_field", id: tag_id))
-        html << a.hint(options.delete(:hint)) if has_hint?
+        html << a.hint(options.delete(:hint)) if options.keys.include?(:hint)
         if render_section_picker?
           html << a.input(:section_id, collection: sections, label_method: :full_path, include_blank: false, label: "Section", wrapper_html: {class: "inline-section-picker"}, input_html: {'data-purpose' => "section_selector"})
         end
@@ -35,7 +37,7 @@ class FilePickerInput < SimpleForm::Inputs::Base
           html << a.input(:data_file_path, label: "Path", wrapper_html: {class: "inline-path"}, input_html: {class: klass})
         end
       end
-      html << a.input(:id, as: :hidden, wrapper: false)
+      # html << a.input(:id, as: :hidden, wrapper: false)
     end
     html.html_safe
 
