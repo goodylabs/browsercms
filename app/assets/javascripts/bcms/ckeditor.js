@@ -6,3 +6,4 @@
 //= require bcms/ckeditor_load
 //= require bcms/ckeditor_standard_config
 //= require bcms/ckeditor_freshminds_config
+//= require bcms_kcfinder/config
