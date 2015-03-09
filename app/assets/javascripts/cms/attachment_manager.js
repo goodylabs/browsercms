@@ -38,11 +38,20 @@ $(function () {
               });
           }
         },
+        enableDeleteButton:function(){
+          // Handle delete attachment button
+          var delete_attachments_btns = $("a[data-purpose='destroy-attachment']");
+          if(delete_attachments_btns.exists()){
+              delete_attachments_btns.off('click').on('click', function(){
+                  var id = $(this).data('id');
+                  $.cms.AttachmentManager.delete($(this));
+              });
+          }
+        },
         // @param [Integer] id The id of the attachment to delete.
         destroy:function (id) {
             if (confirm("Are you sure want to delete this attachment?")) {
                 $.post('/cms/attachments/' + id, {_method:'delete', authenticity_token:$.cms.csrfToken()}, function (attachment_id) {
-//                    console.log(attachment_id);
                     $("#attachment_" + attachment_id).hide();
                     if ($("#assets_table > table tr:visible").length <= 2) {
                         $("#assets_table > table").hide();
@@ -50,6 +59,19 @@ $(function () {
                     $('#attachments_manager_changed').val(true);
                 }, 'script');
 
+            }
+            return false;
+        },
+        delete:function (el) {
+            var id = el.data('id');
+            if (confirm("Are you sure want to delete this attachment?")) {
+                $.post('/cms/attachments/' + id, { _method:'delete', authenticity_token:$.cms.csrfToken()}, function (attachment_id) {
+                    if(el.hasClass('video')){
+                      el.closest('.attachments-row').find('video').remove();
+                    } else {
+                      el.closest('.attachments-row').find('img').remove();
+                    }
+                }, 'script');
             }
             return false;
         }
@@ -82,7 +104,9 @@ $(function () {
         }
         $('.empty-row').hide();
         $.cms.AttachmentManager.enableDeleteButtons();
+        $.cms.AttachmentManager.enableDeleteButton();
     });
 
   $.cms.AttachmentManager.enableDeleteButtons();
+  $.cms.AttachmentManager.enableDeleteButton();
 });
