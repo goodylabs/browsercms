@@ -31,6 +31,12 @@ module Cms
         .references(:category_type)
       end
 
+      def of_type_not_in(type_name, ids_array)
+        where(["#{CategoryType.table_name}.name = ? AND #{Category.table_name}.id not in (?)", type_name, ids_array])
+        .includes(:category_type)
+        .references(:category_type)
+      end
+
     end
     scope :top_level, -> { where(["#{Category.table_name}.parent_id is null"]) }
     scope :list, -> { includes(:category_type) }
