@@ -65,7 +65,7 @@ module Cms
       #
       # @return [Array<Cms::ContentType]
       def other_connectables()
-        available.select { |content_type| content_type.name != DEFAULT_CONTENT_TYPE_NAME }
+        available.select { |content_type| content_type.name != DEFAULT_CONTENT_TYPE_NAME && content_type.connectable? }
       end
 
       # Returns the default content type that is most frequently added to pages.
