@@ -28,7 +28,7 @@ CKEDITOR.plugins.add('delete_content', {
                 ],
 
                 onOk:function () {
-                    $.cms_editor.deleteContent();
+                    window.cms_editor.deleteContent();
                 }
             };
         });

@@ -12,7 +12,7 @@ jQuery(function($){
 });
 
 jQuery(function($){
-  $.cms_editor = {
+  window.cms_editor = {
     // Returns the widget that a user has currently selected.
     // @return [JQuery.Element]
     selectedElement: function() {
@@ -20,15 +20,15 @@ jQuery(function($){
       return $(editor.element.$);
     },
     selectedConnector: function() {
-      var parents = $.cms_editor.selectedElement().parents();
-      return $.cms_editor.selectedElement().parents(".connector");
+      var parents = window.cms_editor.selectedElement().parents();
+      return window.cms_editor.selectedElement().parents(".connector");
     },
     // Reload the parent window
     reload: function() {
       window.parent.location.reload();
     },
     deleteContent: function() {
-      var sc = $.cms_editor.selectedConnector();
+      var sc = window.cms_editor.selectedConnector();
       var remove_path = sc.data('remove');
       $.cms_ajax.delete({
         url: remove_path,
@@ -43,14 +43,14 @@ jQuery(function($){
     // @param [String] direction 'move-up' or 'move-down'
     moveContent: function(editor, direction) {
       var reload = function() {
-        $.cms_editor.reload();
+        window.cms_editor.reload();
       };
-      var path = $.cms_editor.selectedConnector().data(direction);
+      var path = window.cms_editor.selectedConnector().data(direction);
       $.cms_ajax.put({
         url: path,
         success: function() {
           if (editor.checkDirty()) {
-            $.cms_editor.saveChanges(editor, reload);
+            window.cms_editor.saveChanges(editor, reload);
           } else {
             reload.apply();
           }
@@ -109,7 +109,7 @@ jQuery(function($){
       $.cms_ajax.put({
         url: path,
         success: function(data) {
-          $.cms_editor.updatePageStatus(data);
+          window.cms_editor.updatePageStatus(data);
           currentEditor.resetDirty();
           if (afterSave) {
             afterSave.apply();
@@ -141,7 +141,7 @@ jQuery(function($){
       toolbar: 'page_title',
       on: {
         blur: function(event) {
-          $.cms_editor.saveChanges(event.editor);
+          window.cms_editor.saveChanges(event.editor);
         }
       }
     });
@@ -154,7 +154,7 @@ jQuery(function($){
       toolbar: 'inline',
       on: {
         blur: function(event) {
-          $.cms_editor.saveChanges(event.editor);
+          window.cms_editor.saveChanges(event.editor);
         }
       }
     });
