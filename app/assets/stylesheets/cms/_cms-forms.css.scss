@@ -69,6 +69,9 @@
 .control-group {
   div.editor {
     @include rem(margin-top, 3rem);
+    float: none;
+    clear: both;
+
     textarea {
        height: 400px;
        // Should match CKEditor.
