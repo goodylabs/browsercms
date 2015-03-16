@@ -7,12 +7,17 @@
 		@include rem(line-height,2.5rem);
 	}
 
+	.btn {
+		float: left;
+	}
 	.btn-primary,
 	.btn-group {
 		@include rem(margin-left,0.5rem);
-
 		&.dropdown-toggle {
 			margin-left: 0;
+		}
+		.btn-primary {
+			margin-left: 0px;
 		}
 	}
 
@@ -51,8 +56,13 @@
 	button,
 	.btn,
 	.btn-group {
+		float: left;
 		margin-bottom: 0;
+		.btn-primary {
+			margin-left: 0px;
+		}
 	}
+
 }
 
 .bottom-form-btn {
