@@ -3,7 +3,7 @@
 	width: 100%;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 400;
-	@include rem(font-size, 1.1rem);
+	@include rem(font-size, 1.0rem);
 	color: $dark;
 	@include rem(margin-bottom,1.5rem);
 	border-spacing: 0;
