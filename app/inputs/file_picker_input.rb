@@ -23,9 +23,10 @@ class FilePickerInput < SimpleForm::Inputs::Base
       end
     end
     elements = @builder.object.attachments
-    elements = [ @builder.object.attachments.first ] if options[:one_file]
+    elements = [ elements.first ] if single_attachment?
     @builder.simple_fields_for :attachments, elements do |a|
       if matching_attachment?(a)
+        html << a.hidden_field(:id) if single_attachment?
         html << a.hidden_field("attachment_name", value: attribute_name.to_s)
         html << a.file_field(:data, input_html_options.merge('data-purpose' => "cms_file_field", id: tag_id))
         html << a.hint(options.delete(:hint)) if options.keys.include?(:hint)
@@ -44,6 +45,13 @@ class FilePickerInput < SimpleForm::Inputs::Base
   end
 
   protected
+
+  def single_attachment?
+    definition = Cms::Attachment.definitions[@builder.object.class.name]
+    return false if definition.nil?
+    return false if definition[attribute_name.to_sym].nil?
+    definition[attribute_name.to_sym][:type] == :single
+  end
 
   # @override Find errors on attachments rather than the provide attribute name.
   def errors_on_attribute
