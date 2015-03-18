@@ -65,6 +65,8 @@ $(function () {
         delete:function (el) {
             var id = el.data('id');
             if (confirm("Are you sure want to delete this attachment?")) {
+                row = $(el).closest('.attachments-row');
+                row.find('input[type="hidden"][value="' + id + '"]').val('');
                 $.post('/cms/attachments/' + id, { _method:'delete', authenticity_token:$.cms.csrfToken()}, function (attachment_id) {
                     if(el.hasClass('video')){
                       el.closest('.attachments-row').find('video').remove();

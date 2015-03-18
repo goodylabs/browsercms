@@ -178,10 +178,18 @@ module Cms
               order(:version).load
           found_attachments = []
 
-          found_versions.each do |av|
+          choosed_versions = []
+          found_versions.group_by(&:attachment_name).each do |k, v|
+            v.sort_by!(&:version)
+            choosed_versions << v unless (v.last.cardinality.to_sym == :single && v.last.deleted?)
+          end
+          choosed_versions.flatten!
+
+          choosed_versions.each do |av|
             record = av.build_object_from_version
             found_attachments << record
           end
+
           found_attachments.delete_if { |value| value.deleted? }
           found_attachments
         end

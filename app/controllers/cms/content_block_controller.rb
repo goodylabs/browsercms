@@ -228,7 +228,6 @@ module Cms
       @content_type.form
     end
 
-
     def build_block
       if params[model_form_name]
         @block = model_class.new(model_params)

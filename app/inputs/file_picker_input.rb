@@ -23,7 +23,9 @@ class FilePickerInput < SimpleForm::Inputs::Base
       end
     end
     elements = @builder.object.attachments
-    elements = [ elements.first ] if single_attachment?
+    if single_attachment?
+      elements = [ elements.select{ |attachment| attachment.attachment_name == attribute_name.to_s }.first ]
+    end
     @builder.simple_fields_for :attachments, elements do |a|
       if matching_attachment?(a)
         html << a.hidden_field(:id) if single_attachment?
