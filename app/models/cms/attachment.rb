@@ -178,7 +178,7 @@ module Cms
     end
 
     def is_image?
-      %w[jpg gif png jpeg].include?(data_file_extension)
+      %w[jpg gif png jpeg svg].include?(data_file_extension)
     end
 
     # Returns a Paperclip generated relative path to the file (with thumbnail sizing)
