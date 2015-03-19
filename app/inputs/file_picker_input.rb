@@ -28,6 +28,7 @@ class FilePickerInput < SimpleForm::Inputs::Base
     end
     @builder.simple_fields_for :attachments, elements do |a|
       if matching_attachment?(a)
+        html << '<div class="attachments-row">'
         html << a.hidden_field(:id) if single_attachment?
         html << a.hidden_field("attachment_name", value: attribute_name.to_s)
         html << a.file_field(:data, input_html_options.merge('data-purpose' => "cms_file_field", id: tag_id))
@@ -39,6 +40,18 @@ class FilePickerInput < SimpleForm::Inputs::Base
           klass = object.new_record? ? "suggest_file_path" : "keep_existing_path"
           html << a.input(:data_file_path, label: "Path", wrapper_html: {class: "inline-path"}, input_html: {class: klass})
         end
+        if a.object.data_file_name.present?
+          html << '<div class="btn-row">'
+          css_class = a.object.is_image? ? 'image' : 'video'
+          html << "<a class='btn btn-mini btn-danger #{css_class}' href='#' data-purpose='destroy-attachment' data-id='#{a.object.id}'>Delete attachment</a>"
+          html << '</div>'
+          if a.object.is_image?
+            html << "<img src='#{a.object.url}'>"
+          else
+            html << "<video controls='controls' src='#{a.object.url}'></video>"
+          end
+        end
+        html << '</div>'
       end
       # html << a.input(:id, as: :hidden, wrapper: false)
     end
