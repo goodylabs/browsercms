@@ -737,3 +737,7 @@ legend + .control-group {
 .control-group.info textarea:focus {
   	border-color: $secondary;
 }
+
+.input-row {
+  overflow: hidden;
+}
