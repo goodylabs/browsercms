@@ -200,7 +200,8 @@
         this._theform = $(this.inputelement).parents("form");
                 // Bind form submit event
         if(this._theform.length) {
-          this._theform.on("submit", function(){ return _this._formsubmit(); });
+          this._theform.on("submit", function(event){ 
+            return _this._formsubmit($(event.originalEvent.explicitOriginalTarget)); });
         }
         // Call helper functions
         this._bindControlButtons();
@@ -681,7 +682,7 @@
       $(this.element).find('[data-variable="' + variable + '"]').val(value);
     },
     // form submitted
-    _formsubmit: function() {
+    _formsubmit: function(element) {
       if(!window.FormData) this.set_messagebox("Sorry, the FormData API is not supported!");
       else {
         var _this = this;
@@ -694,7 +695,7 @@
             else _this._filename = _this._filename.match(/^[^\.]*/) + "." + inputblob.type.match(/[^\/]*$/);
             _this._theformdata.append(inputname, inputblob, _this._filename);
           }
-
+          _this._theformdata.append('commit', element.attr('value'))
           //send request
           var request = new XMLHttpRequest();
                     request.onprogress = function(e) {
@@ -719,9 +720,7 @@
           request.send(_this._theformdata);
           request.onreadystatechange = function() {
             if (request.readyState === 4)  { 
-              console.log(request);
               var urlArr = request.responseURL.split('/');
-              console.log(parseInt(urlArr[urlArr.length-1]).toString());
               if (parseInt(urlArr[urlArr.length-1]).toString() !== 'NaN') {
                 window.location = request.responseURL;
               } else {
