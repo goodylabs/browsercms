@@ -190,6 +190,13 @@ module Cms
       data.url(style_name)
     end
 
+    def versioned_url(style_name = configuration.default_style)
+      url = url(style_name)
+      u = URI.parse(url)
+      u.query = Rack::Utils.parse_nested_query(u.query).merge({version: self.version}).to_query
+      u.to_s
+    end
+
     # Returns the absolute file location of the underlying asset
     def path(style_name = configuration.default_style)
       data.path(style_name)

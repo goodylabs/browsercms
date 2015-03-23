@@ -48,9 +48,9 @@ class FilePickerInput < SimpleForm::Inputs::Base
           html << "<a class='btn btn-mini btn-danger #{css_class}' href='#' data-purpose='destroy-attachment' data-id='#{a.object.id}'>Delete attachment</a>"
           html << '</div>'
           if a.object.is_image?
-            html << "<img src='#{a.object.url}'>"
+            html << "<img src='#{a.object.versioned_url}'>"
           else
-            html << "<video controls='controls' src='#{a.object.url}'></video>"
+            html << "<video controls='controls' src='#{a.object.versioned_url}'></video>"
           end
         end
         html << '</div>'
