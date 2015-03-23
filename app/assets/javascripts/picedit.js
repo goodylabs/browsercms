@@ -52,10 +52,10 @@
 
         /* Prepare the template */
         /*unhide_in_prod*/
-         this._template(); 
+         this._template();
         /*unhide_in_prod*/
 
-        /*hide_in_prod*/ /* 
+        /*hide_in_prod*/ /*
         this.init();
          */ /*hide_in_prod*/
     }
@@ -66,7 +66,7 @@
         // You already have access to the DOM element and
         // the options via the instance, e.g. this.element
         // and this.settings
-        
+
         // Save instance of this for inline functions
         var _this = this;
                 // Get type of element to be used (type="file" and type="picedit" are supported)
@@ -127,8 +127,8 @@
             _this._filename = file.name;
           }
           var reader = new FileReader();
-          reader.onload = function(e) { 
-            _this._create_image_with_datasrc(e.target.result, false, file); 
+          reader.onload = function(e) {
+            _this._create_image_with_datasrc(e.target.result, false, file);
           };
           reader.readAsDataURL(file);
          }
@@ -153,7 +153,7 @@
         if (!window.Clipboard) { // Firefox
           var pasteCatcher = $(document.createElement("div"));
           pasteCatcher.prop("contenteditable","true").css({
-            "position" : "absolute", 
+            "position" : "absolute",
             "left" : -999,
             "width" : 0,
             "height" : 0,
@@ -200,7 +200,7 @@
         this._theform = $(this.inputelement).parents("form");
                 // Bind form submit event
         if(this._theform.length) {
-          this._theform.on("submit", function(event){ 
+          this._theform.on("submit", function(event){
             return _this._formsubmit($(event.originalEvent.explicitOriginalTarget)); });
         }
         // Call helper functions
@@ -652,9 +652,9 @@
         // handle click actions on top nav buttons
         else if($(this).hasClass("picedit_action")) {
           $(this).parent(".picedit_element").toggleClass("active").siblings(".picedit_element").removeClass("active");
-          if($(this).parent(".picedit_element").hasClass("active")) 
+          if($(this).parent(".picedit_element").hasClass("active"))
             $(this).closest(".picedit_nav_box").addClass("active");
-          else 
+          else
             $(this).closest(".picedit_nav_box").removeClass("active");
         }
       });
@@ -718,18 +718,18 @@
             _this.options.formSubmitted(this);
           };
           request.send(_this._theformdata);
-          request.onreadystatechange = function() {
-            if (request.readyState === 4)  { 
-              var urlArr = request.responseURL.split('/');
-              if (parseInt(urlArr[urlArr.length-1]).toString() !== 'NaN') {
-                window.location = request.responseURL;
-              } else {
-                var newDoc = document.open("text/html", "replace");
-                newDoc.write(request.responseText);
-                newDoc.close();
-              }
-            }
-          };
+          // request.onreadystatechange = function() {
+          //   if (request.readyState === 4)  {
+          //     var urlArr = request.responseURL.split('/');
+          //     if (parseInt(urlArr[urlArr.length-1]).toString() !== 'NaN') {
+          //       window.location = request.responseURL;
+          //     } else {
+          //       var newDoc = document.open("text/html", "replace");
+          //       newDoc.write(request.responseText);
+          //       newDoc.close();
+          //     }
+          //   }
+          // };
         });
       }
       return false;
