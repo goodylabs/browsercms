@@ -200,8 +200,12 @@
         this._theform = $(this.inputelement).parents("form");
                 // Bind form submit event
         if(this._theform.length) {
-          this._theform.on("submit", function(event){
-            return _this._formsubmit($(event.originalEvent.explicitOriginalTarget)); });
+          $('input[type="submit"]').on("click", function(event){
+            return _this._formsubmit($(event.target)); 
+          });
+          // this._theform.on("submit", function(event){
+          //   return _this._formsubmit($(event.originalEvent.explicitOriginalTarget)); 
+          // });
         }
         // Call helper functions
         this._bindControlButtons();
@@ -718,18 +722,6 @@
             _this.options.formSubmitted(this);
           };
           request.send(_this._theformdata);
-          // request.onreadystatechange = function() {
-          //   if (request.readyState === 4)  {
-          //     var urlArr = request.responseURL.split('/');
-          //     if (parseInt(urlArr[urlArr.length-1]).toString() !== 'NaN') {
-          //       window.location = request.responseURL;
-          //     } else {
-          //       var newDoc = document.open("text/html", "replace");
-          //       newDoc.write(request.responseText);
-          //       newDoc.close();
-          //     }
-          //   }
-          // };
         });
       }
       return false;
