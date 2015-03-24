@@ -201,10 +201,10 @@
                 // Bind form submit event
         if(this._theform.length) {
           $('input[type="submit"]').on("click", function(event){
-            return _this._formsubmit($(event.target)); 
+            return _this._formsubmit($(event.target));
           });
           // this._theform.on("submit", function(event){
-          //   return _this._formsubmit($(event.originalEvent.explicitOriginalTarget)); 
+          //   return _this._formsubmit($(event.originalEvent.explicitOriginalTarget));
           // });
         }
         // Call helper functions
@@ -798,7 +798,8 @@
 
                 // Allow instances to be destroyed via the 'destroy' method
                 if (options === 'destroy') {
-                  $.data(this, 'plugin_' + pluginName, null);
+                  $.data(this, 'plugin_' + pluginName)._image = '';
+                  /*$.data(this, 'plugin_' + pluginName, null);*/
                 }
             });
 

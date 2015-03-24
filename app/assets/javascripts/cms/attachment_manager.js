@@ -50,8 +50,7 @@ $(function () {
                     var context = canvas.getContext('2d')
                     context.clearRect(0, 0, canvas.width, canvas.height);
                   });
-                  // $("#freshminds_case_study_image").picEdit({defaultImage: false});
-                  $('.picedit_box').closest('.input-row').find('.file_picker').picEdit({defaultImage: false});
+                  $('.picedit_box').closest('.input-row').find('.file_picker').picEdit('destroy');
                 }
             });
           }
