@@ -699,6 +699,12 @@
             else _this._filename = _this._filename.match(/^[^\.]*/) + "." + inputblob.type.match(/[^\/]*$/);
             _this._theformdata.append(inputname, inputblob, _this._filename);
           }
+          if($('textarea.editor').exists()){
+            var editor = $('textarea.editor')
+            var field_name = editor.attr('name');
+            var field_id = editor.attr('id');
+            _this._theformdata.append(field_name, CKEDITOR.instances[field_id].getData());
+          }
           _this._theformdata.append('commit', element.attr('value'))
           //send request
           var request = new XMLHttpRequest();
