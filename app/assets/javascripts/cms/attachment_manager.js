@@ -43,9 +43,17 @@ $(function () {
           var delete_attachments_btns = $("a[data-purpose='destroy-attachment']");
           if(delete_attachments_btns.exists()){
               delete_attachments_btns.off('click').on('click', function(){
-                  var id = $(this).data('id');
-                  $.cms.AttachmentManager.delete($(this));
-              });
+                var id = $(this).data('id');
+                $.cms.AttachmentManager.delete($(this));
+                if($('.picedit_box').exists()){
+                  jQuery.each( $('canvas'), function( i, canvas ) {
+                    var context = canvas.getContext('2d')
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                  });
+                  // $("#freshminds_case_study_image").picEdit({defaultImage: false});
+                  $('.picedit_box').closest('.input-row').find('.file_picker').picEdit({defaultImage: false});
+                }
+            });
           }
         },
         // @param [Integer] id The id of the attachment to delete.
