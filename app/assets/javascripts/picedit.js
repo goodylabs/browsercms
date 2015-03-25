@@ -703,7 +703,9 @@
             var editor = $('textarea.editor')
             var field_name = editor.attr('name');
             var field_id = editor.attr('id');
-            _this._theformdata.append(field_name, CKEDITOR.instances[field_id].getData());
+            if(typeof CKEDITOR.instances[field_id] !== 'undefined'){
+              _this._theformdata.append(field_name, CKEDITOR.instances[field_id].getData());  
+            }
           }
           _this._theformdata.append('commit', element.attr('value'))
           //send request
