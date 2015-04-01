@@ -42,7 +42,8 @@ $(function () {
           // Handle delete attachment button
           var delete_attachments_btns = $("a[data-purpose='destroy-attachment']");
           if(delete_attachments_btns.exists()){
-              delete_attachments_btns.off('click').on('click', function(){
+              delete_attachments_btns.off('click').on('click', function(e){
+                e.preventDefault();
                 var id = $(this).data('id');
                 $.cms.AttachmentManager.delete($(this));
                 if($('.picedit_box').exists()){
