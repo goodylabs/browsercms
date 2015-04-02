@@ -42,10 +42,18 @@ $(function () {
           // Handle delete attachment button
           var delete_attachments_btns = $("a[data-purpose='destroy-attachment']");
           if(delete_attachments_btns.exists()){
-              delete_attachments_btns.off('click').on('click', function(){
-                  var id = $(this).data('id');
-                  $.cms.AttachmentManager.delete($(this));
-              });
+              delete_attachments_btns.off('click').on('click', function(e){
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.cms.AttachmentManager.delete($(this));
+                if($('.picedit_box').exists()){
+                  jQuery.each( $('canvas'), function( i, canvas ) {
+                    var context = canvas.getContext('2d')
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                  });
+                  $('.picedit_box').closest('.input-row').find('.file_picker').picEdit('destroy');
+                }
+            });
           }
         },
         // @param [Integer] id The id of the attachment to delete.

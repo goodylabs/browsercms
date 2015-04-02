@@ -178,12 +178,23 @@ module Cms
     end
 
     def is_image?
-      %w[jpg gif png jpeg svg].include?(data_file_extension)
+      image = %w[jpg gif png jpeg svg].include?(data_file_extension)
+      unless image
+        image = image_data_content_type?
+      end
+      image
     end
 
     # Returns a Paperclip generated relative path to the file (with thumbnail sizing)
     def url(style_name = configuration.default_style)
       data.url(style_name)
+    end
+
+    def versioned_url(style_name = configuration.default_style)
+      url = url(style_name)
+      u = URI.parse(url)
+      u.query = Rack::Utils.parse_nested_query(u.query).merge({version: self.version}).to_query
+      u.to_s
     end
 
     # Returns the absolute file location of the underlying asset
@@ -226,6 +237,10 @@ module Cms
 
     def data_file_extension
       data_file_name.split('.').last.downcase if data_file_name && data_file_name['.']
+    end
+
+    def image_data_content_type?
+      data_content_type.present? && %w{image/gif image/jpeg image/png}.include?(data_content_type)
     end
 
     # Filter - Ensure that paths are going to URL friendly (and won't need encoding for special characters.')

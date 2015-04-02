@@ -64,7 +64,7 @@ module Cms
 
         # copy new instance variables to the template
         %w[page mode show_page_toolbar].each do |v|
-          @template.instance_variable_set("@#{v}", instance_variable_get("@#{v}"))
+          @template.instance_variable_set("@#{v}", instance_variable_get("@#{v}")) unless @template.frozen?
         end
 
         # clear out any content already captured

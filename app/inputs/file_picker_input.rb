@@ -31,7 +31,9 @@ class FilePickerInput < SimpleForm::Inputs::Base
         html << '<div class="attachments-row">'
         html << a.hidden_field(:id) if single_attachment?
         html << a.hidden_field("attachment_name", value: attribute_name.to_s)
+        html << '<div class="input-row">'
         html << a.file_field(:data, input_html_options.merge('data-purpose' => "cms_file_field", id: tag_id))
+        html << '</div>'
         html << a.hint(options.delete(:hint)) if options.keys.include?(:hint)
         if render_section_picker?
           html << a.input(:section_id, collection: sections, label_method: :full_path, include_blank: false, label: "Section", wrapper_html: {class: "inline-section-picker"}, input_html: {'data-purpose' => "section_selector"})
@@ -46,9 +48,9 @@ class FilePickerInput < SimpleForm::Inputs::Base
           html << "<a class='btn btn-mini btn-danger #{css_class}' href='#' data-purpose='destroy-attachment' data-id='#{a.object.id}'>Delete attachment</a>"
           html << '</div>'
           if a.object.is_image?
-            html << "<img src='#{a.object.url}'>"
+            html << "<img src='#{a.object.versioned_url}'>"
           else
-            html << "<video controls='controls' src='#{a.object.url}'></video>"
+            html << "<video controls='controls' src='#{a.object.versioned_url}'></video>"
           end
         end
         html << '</div>'

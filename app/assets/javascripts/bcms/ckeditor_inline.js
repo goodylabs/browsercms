@@ -6,6 +6,7 @@ CKEDITOR.config.toolbar_inline =
         { name:'clipboard', items:[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
         { name:'editing', items:[ 'Scayt' ] },
         { name:'insert', items:[ 'Image', 'Link', 'Unlink', 'Anchor' ] },
+        { name:'insert', items:[ 'Image', 'oembed', 'Link', 'Unlink', 'Anchor' ] },
         { name:'content', items:[ 'EditContent','MoveContentUp','MoveContentDown','DeleteContent']},
         '/',
         { name:'styles', items:[ 'Format', 'Styles' ] },
@@ -20,4 +21,4 @@ CKEDITOR.config.toolbar_page_title =
         { name:'clipboard', items:[ 'Cut', 'Copy', 'Paste' ] }
 
     ];
-CKEDITOR.config.extraPlugins = 'delete_content,edit_content,move_content';
+CKEDITOR.config.extraPlugins = 'delete_content,edit_content,move_content,oembed';

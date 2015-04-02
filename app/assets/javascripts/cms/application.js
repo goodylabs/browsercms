@@ -11,6 +11,7 @@
 //= require cms/core_library
 //= require cms/content_types
 //= require cms/content_block
+//= require picedit
 //= require cms/attachment_manager
 //= require cms/form_builder
 //= require cms/sitemap
