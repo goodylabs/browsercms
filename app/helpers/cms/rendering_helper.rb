@@ -26,7 +26,7 @@ module Cms
     def show(method, options={})
       if (!is_current_user_able_to_edit_this_content?(@content_block)) # Need to check the current user can edit the page attached to this block too
         value = @content_block.send(method)
-        (value.blank?) ? (options[:value_for_blank] || 'blank') : (value.respond_to?(:html_safe) ? value.html_safe : value)
+        (value.blank?) ? ((options.has_key?(:value_for_blank)) ? options[:value_for_blank] : 'blank') : (value.respond_to?(:html_safe) ? value.html_safe : value)
       else
         content_tag 'div',
                     id: random_unique_identifier(),
