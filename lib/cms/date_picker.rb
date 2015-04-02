@@ -12,11 +12,11 @@ module Cms
 
       # Returns the date format that the JQuery selector will need to use.
       def jquery_format
-        'yy/mm/dd'
+        'dd/mm/yy'
       end
 
       def format_for_ui(date)
-        date ? date.strftime('%Y/%m/%d') : nil
+        date ? date.strftime('%d/%m/%Y') : nil
       end
     end
   end
