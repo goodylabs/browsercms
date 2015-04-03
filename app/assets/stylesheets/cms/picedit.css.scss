@@ -196,8 +196,11 @@
   transition: all 200ms ease-out;
 }
 .picedit_control_menu label {
-    display: inline-block;
-    margin: 0 0.5em;
+  display: inline-block !important;
+  margin: 0 0.5em !important;;
+  float: none !important;
+  width: auto !important;
+  font-size: 16px !important;
 }
 .picedit_control_menu label > span {
 }
@@ -254,7 +257,10 @@
   margin-left: -9px;
 }
 .picedit_input {
-    width: 3em;
+  width: 3em !important;
+  margin: none !important;
+  float: none !important;
+  display: inline-block !important;
 }
 .picedit_canvas_box {
     width: 100%;
