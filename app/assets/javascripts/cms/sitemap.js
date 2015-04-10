@@ -154,9 +154,8 @@ jQuery(function($){
     $('#sitemap .nav-list-span').droppable({
       hoverClass: "droppable",
       drop: function(event, ui) {
-        var elementToMove = ui.draggable.parents('.nav-list').first();
-        console.log(elementToMove);
-        var elementDroppedOn = $(this).parents('.nav-list').first();
+        var elementToMove = ui.draggable.closest('.nav-list').first();
+        var elementDroppedOn = $(this).closest('.nav-list').first();
         var targetDepth = $(this).data('depth');
         var plusIndex = 1
 
@@ -164,9 +163,9 @@ jQuery(function($){
           // Drop INTO sections
           sitemap.attemptOpen($(this));
           sitemap.updateDepth(ui.draggable, targetDepth + 1);
-          elementDroppedOn.find('li').first().append(elementToMove);
+          console.log(elementDroppedOn.find('li').first().find('span.children'));
+          elementDroppedOn.find('li').first().find('.children:first').append(elementToMove);
           var newParentId = $(this).data('id');
-          plusIndex = plusIndex + 1;
         } else {
           sitemap.updateDepth(ui.draggable, targetDepth);
           // Drop AFTER pages
