@@ -155,9 +155,10 @@ jQuery(function($){
       hoverClass: "droppable",
       drop: function(event, ui) {
         var elementToMove = ui.draggable.parents('.nav-list').first();
+        console.log(elementToMove);
         var elementDroppedOn = $(this).parents('.nav-list').first();
         var targetDepth = $(this).data('depth');
-
+        var plusIndex = 1
 
         if (sitemap.isFolder($(this))) {
           // Drop INTO sections
@@ -165,6 +166,7 @@ jQuery(function($){
           sitemap.updateDepth(ui.draggable, targetDepth + 1);
           elementDroppedOn.find('li').first().append(elementToMove);
           var newParentId = $(this).data('id');
+          plusIndex = plusIndex + 1;
         } else {
           sitemap.updateDepth(ui.draggable, targetDepth);
           // Drop AFTER pages
@@ -174,7 +176,7 @@ jQuery(function($){
 
         // Move item on server
         var nodeIdToMove = ui.draggable.data('id');
-        var newPosition = elementToMove.index();
+        var newPosition = elementToMove.index() + plusIndex;
         console.log("Move section_node", nodeIdToMove, " to parent:", newParentId, 'at position', newPosition);
         sitemap.moveTo(nodeIdToMove, newParentId, newPosition);
 
