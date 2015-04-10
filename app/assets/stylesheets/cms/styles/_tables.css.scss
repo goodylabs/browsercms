@@ -59,7 +59,7 @@
 	border-collapse: separate;
 	*border-collapse: collapse;
 	@include border-radius(5px);
-
+	table-layout: fixed;
 	thead {
 		display: table-header-group;
 		@include border-radius(5px 5px 0 0);
