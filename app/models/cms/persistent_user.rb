@@ -66,6 +66,10 @@ module Cms
       groups.cms_access.count > 0
     end
 
+    def freshminds_team?
+      groups.map(&:name).include?('Freshminds Team')
+    end
+
     def disable
       if self.class.where(["expires_at is null and id != ?", id]).count > 0
         self.expires_at = Time.now - 2.minutes

@@ -1,5 +1,5 @@
 <ul class="dropdown-menu" id="<%= id %>">
-  <% if current_user.groups.map(&:name).include?('Freshminds Team') %>
+  <% if current_user.freshminds_team? %>
     <li><a href="/freshminds/advertisements/">Job Advertisement</a></li>
   <% else %>
     <% if library %>
