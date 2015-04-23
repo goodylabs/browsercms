@@ -1,13 +1,17 @@
 <ul class="dropdown-menu" id="<%= id %>">
-  <% if library %>
-    <%= nav_link_to "Text", cms.content_library_path %>
-    <%= divider_tag %>
-  <% end %>
-  <% modules = Cms::ContentType.available_by_module
-     modules.keys.sort.each_with_index do |module_name, i| %>
-      <%= divider_tag(i) %>
-      <% modules[module_name].each do |type| %>
-          <%= nav_link_to h(type.display_name), engine_aware_path(type) %>
-      <% end -%>
+  <% if current_user.groups.map(&:name).include?('Freshminds Team') %>
+    <li><a href="/freshminds/advertisements/">Job Advertisement</a></li>
+  <% else %>
+    <% if library %>
+      <%= nav_link_to "Text", cms.content_library_path %>
+      <%= divider_tag %>
+    <% end %>
+    <% modules = Cms::ContentType.available_by_module
+       modules.keys.sort.each_with_index do |module_name, i| %>
+        <%= divider_tag(i) %>
+        <% modules[module_name].each do |type| %>
+            <%= nav_link_to h(type.display_name), engine_aware_path(type) %>
+        <% end -%>
+    <% end %>
   <% end %>
 </ul>
