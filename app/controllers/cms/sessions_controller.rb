@@ -6,6 +6,16 @@ module Cms
 
     layout 'cms/application'
 
+    def create
+      cookies[:admin_logged_in] = "true"
+      super
+    end
+
+    def destroy
+      cookies[:admin_logged_in] = ""
+      super
+    end
+
     def new
       use_page_title 'Login'
       super
