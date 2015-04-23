@@ -141,7 +141,7 @@ jQuery(function($){
       toolbar: 'page_title',
       on: {
         blur: function(event) {
-          //window.cms_editor.saveChanges(event.editor);
+          window.cms_editor.saveChanges(event.editor);
         }
       }
     });
@@ -154,7 +154,7 @@ jQuery(function($){
       toolbar: 'inline',
       on: {
         blur: function(event) {
-          //window.cms_editor.saveChanges(event.editor);
+          window.cms_editor.saveChanges(event.editor);
         }
       }
     });

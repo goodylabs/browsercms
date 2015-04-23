@@ -1,0 +1,76 @@
+// calculate font-size to REM
+@function rem-calc($size) {
+  $remSize: $size / $font-size-base;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: rem-calc($size);
+}
+
+// animations
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes $animation-name {
+    @content;
+  }
+  @-moz-keyframes $animation-name {
+    @content;
+  }
+  @-ms-keyframes $animation-name {
+    @content;
+  }
+  @-o-keyframes $animation-name {
+    @content;
+  }
+  @keyframes $animation-name {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  @include translateY(-50%);
+}
+
+/*
+* $weight: 300 - light
+* $weight: 400 - regular
+* $weight: 500 - medium
+*/
+@mixin font($weight) {
+  font-style: normal;
+
+  @if $weight == 'light' {
+    font-family: "omnes-pro", $font-light, sans-serif;
+    font-weight: 300;
+  }
+  @else if $weight == 'medium' {
+    font-family: "omnes-pro", $font-medium, sans-serif;
+    font-weight: 500;
+  }
+  @else {
+    font-family: "omnes-pro", $font-regular, sans-serif;
+    font-weight: 400;
+  }
+}
+
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}

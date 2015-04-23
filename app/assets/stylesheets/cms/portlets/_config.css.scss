@@ -1,0 +1,68 @@
+// LAYOUT
+$layout-max-width: 1425px;
+// $layout-max-width: 2200px;
+
+// COLORS
+$color1: #ee4d9b; // magenta - subnavigation background
+$color2: #de4891; // dark magenta
+$color3: #58595b; // dark gray - main navigation
+$color4: #484c54;
+$color5: #575b64;
+$color6: #767c88;
+$color7: #888e9a;
+$color8: #c5c3c4;
+$color9: #d7d7d7;
+$color10: #eeeeee;
+
+$color11: #f7f6f6;
+$color12: #eeeced;
+$color13: #4a4a4a;
+$color14: #323334; /* content-box--bottom on hover */
+$color15: #c5c3c4; /* intro header, next to h1  */
+$color16: #58585a; /* free text, copy text  */
+$color17: #aeaeae; /* free text -> h2*/
+$color18: #ababac; /* input placeholders */
+
+$error-color: #9c064f;
+
+$color-nav-m: #ee4d9b;
+$color-nav-m-expanded: #ce3f84;
+$color-nav-m-expanded2: #bf3d77;
+
+$border-def: 2px $color12 solid;
+
+// FONTS
+/*
+FIXME: too late
+this is interesting as most font sizes are different than 16px - mostly 14, 18, 22, 12...
+*/
+$font-size-base: 16px;
+
+/* generic font sizes, to be used in scss */
+$font-size-xs: rem-calc(14px);
+$font-size-sm1: rem-calc(16px);
+$font-size-sm: rem-calc(18px);
+$font-size-md: rem-calc(22px);
+$font-size-lg: rem-calc(33px);
+$font-size-xlg: rem-calc(36px);
+$font-size-xxlg: rem-calc(50px);
+
+$font-size-nav-m: rem-calc(14px);
+$font-size-nav-m2: rem-calc(12px);
+
+$serifa-bold: "SerifaStd-Bold";
+
+$fira-regular: 'FiraSans-Regular';
+$fira-medium: 'FiraSans-Medium';
+$fira-bold: 'FiraSans-Bold';
+
+$font-color: #333;
+
+// BUTTONS
+$def-button-bg: #cdcdcd;
+$primary-button-bg: #ee4d9b;
+$def-button-text-color: #ffffff;
+
+// FORMS
+$def-input-border: 2px $color12 solid;
+$def-input-error-border: 2px $color1 solid;

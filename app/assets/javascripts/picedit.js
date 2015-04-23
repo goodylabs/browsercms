@@ -637,6 +637,9 @@
       $(this.element).css({
         "width": viewport.width,
         "height": viewport.height
+        // "width": "100%",
+        // "min-height": "400px",
+        // "height": viewport.height
       });
       //set the global viewport
       this._viewport = viewport;

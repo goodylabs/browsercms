@@ -1,0 +1,93 @@
+// remove it
+.filter-header {
+  height: 100%;
+  background-color: $color12;
+}
+
+.filter-header__title-section {
+  background-color: $color11;
+  height: 65px;
+}
+
+.filter-header__title {
+  padding-left: 31px;
+  font-weight: bold;
+  color: $color4;
+}
+// -- remove it
+
+
+.filter-section {
+  margin-top: rem-calc(15px);
+  clear: both;
+}
+
+.filter-section__header {
+  text-transform: uppercase;
+  border-bottom: 2px solid $color8;
+  padding: rem-calc(10px) 0;
+  font-size: rem-calc(12px);
+  font-family: $fira-bold;
+  @include single-transition(all, 0.3s, ease);
+  color: $color13;
+
+  &:hover {
+    color: $color1;
+  }
+}
+
+.filter-section__content {
+  padding-top: 17px;
+
+  > div {
+    position: relative;
+  }
+
+  label {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    line-height: 1;
+    background-color: $color8;
+    color: #fff;
+    font-family: $fira-medium;
+    font-size: rem-calc(12px);
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: rem-calc(11px) rem-calc(15px) rem-calc(9px);
+    margin: 0 0 rem-calc(13px) rem-calc(5px);
+    @include border-radius(16px);
+    @include single-transition(all, 0.3s, ease);
+
+    &:hover {
+      background-color: $color3;
+    }
+  }
+
+  input[type=checkbox] {
+    position:absolute;
+    z-index:-1000;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height:1px;
+    width:1px;
+    margin:-1px;
+    padding:0;
+    left: -9999px;
+    border:0;
+
+    &:checked + label {
+      background-color: $color1;
+    }
+  }
+}
+
+.filter-section__content--tags {
+  margin-left: rem-calc(-5px);
+}
+
+.filter-section--button {
+  text-align: center;
+  border-bottom: 2px solid $color8;
+  padding: rem-calc(15px) 0 rem-calc(30px);
+}

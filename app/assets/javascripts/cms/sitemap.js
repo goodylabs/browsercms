@@ -154,16 +154,17 @@ jQuery(function($){
     $('#sitemap .nav-list-span').droppable({
       hoverClass: "droppable",
       drop: function(event, ui) {
-        var elementToMove = ui.draggable.parents('.nav-list').first();
-        var elementDroppedOn = $(this).parents('.nav-list').first();
+        var elementToMove = ui.draggable.closest('.nav-list').first();
+        var elementDroppedOn = $(this).closest('.nav-list').first();
         var targetDepth = $(this).data('depth');
-
+        var plusIndex = 1
 
         if (sitemap.isFolder($(this))) {
           // Drop INTO sections
           sitemap.attemptOpen($(this));
           sitemap.updateDepth(ui.draggable, targetDepth + 1);
-          elementDroppedOn.find('li').first().append(elementToMove);
+          console.log(elementDroppedOn.find('li').first().find('span.children'));
+          elementDroppedOn.find('li').first().find('.children:first').append(elementToMove);
           var newParentId = $(this).data('id');
         } else {
           sitemap.updateDepth(ui.draggable, targetDepth);
@@ -174,7 +175,7 @@ jQuery(function($){
 
         // Move item on server
         var nodeIdToMove = ui.draggable.data('id');
-        var newPosition = elementToMove.index();
+        var newPosition = elementToMove.index() + plusIndex;
         console.log("Move section_node", nodeIdToMove, " to parent:", newParentId, 'at position', newPosition);
         sitemap.moveTo(nodeIdToMove, newParentId, newPosition);
 

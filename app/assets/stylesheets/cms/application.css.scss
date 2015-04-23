@@ -49,3 +49,10 @@ $experimental-support-for-khtml: false;
 @import 'cms/_assets';
 @import 'cms/_dashboard';
 @import 'cms/_sidebar';
+
+
+@import "compass/utilities";
+@import 'portlets/config';
+@import 'portlets/mixins';
+@import 'portlets/filters';
+@import 'portlets/sidebars';
