@@ -12,6 +12,8 @@
 //= require cms/content_types
 //= require cms/content_block
 //= require picedit
+//= require jquery.plugin
+//= require jquery.maxlength
 //= require cms/attachment_manager
 //= require cms/form_builder
 //= require cms/sitemap
