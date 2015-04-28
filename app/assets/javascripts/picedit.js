@@ -713,13 +713,18 @@
           _this._theformdata.append('commit', element.attr('value'))
           //send request
           var request = new XMLHttpRequest();
-                    request.onprogress = function(e) {
-                        if(e.lengthComputable) var total = e.total;
-                        else var total = Math.ceil(inputblob.size * 1.3);
-                        var progress = Math.ceil(((e.loaded)/total)*100);
-                        if (progress > 100) progress = 100;
-                        _this.set_messagebox("Please Wait... Uploading... " + progress + "% Uploaded.", false, false);
-                    };
+          if(typeof inputblob !== 'undefined'){
+            request.onprogress = function(e) {
+              if(e.lengthComputable){
+                var total = e.total;
+              } else {
+                var total = Math.ceil(inputblob.size * 1.3);
+              } 
+              var progress = Math.ceil(((e.loaded)/total)*100);
+              if (progress > 100) progress = 100;
+              _this.set_messagebox("Please Wait... Uploading... " + progress + "% Uploaded.", false, false);
+            };
+          }
           request.open(_this._theform.prop("method"), _this._theform.prop("action"), true);
           request.onload = function(e) {
             if(this.status != 200) {
