@@ -1,5 +1,5 @@
 <% indent = (depth - 1) * 4
-%><%= " "*(indent + 4) %><li id="<%= menu_item[:id] %>" class="navigation__item navigation__item--<%= depth %><%= ' navigation__item--first' if position == 1 %><%= ' navigation__item--last' if position == item_count %><%= ' navigation__item--active' if menu_item[:selected] %><%= ' navigation__item--opened' unless menu_item[:children].blank? %>">
+%><%= " "*(indent + 4) %><li id="<%= menu_item[:id] %>" class="navigation__item navigation__item--<%= depth %><%= ' navigation__item--first' if position == 1 %><%= ' navigation__item--last' if position == item_count %><%= ' navigation__item--active' if menu_item[:selected] %><%= ' navigation__item--with-submenu' unless menu_item[:children].blank? %>">
 <%= " "*(indent + 6) %><a class="navigation__link" href="<%= menu_item[:url] %>"<%= ' target=#{menu_item[:target]}' if menu_item[:target] %>><%= menu_item[:name] %></a>
 <% unless menu_item[:children].blank?
 %><%= " "*(indent + 6)  %><ul>
