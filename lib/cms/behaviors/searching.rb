@@ -15,23 +15,43 @@ module Cms
         
           #This is in a method to allow classes to override it
           scope :search, lambda{|search_params|
-            term = search_params.is_a?(Hash) ? search_params[:term] : search_params
             conditions = []
-            unless term.blank?
+            if search_params.is_a?(Hash)
               searchable_columns.each do |c|
-                if conditions.empty?
-                  conditions = ["#{table_name}.#{c} like ?"]
-                else
-                  conditions.first << "or #{table_name}.#{c} like ?"
+                c = c.to_s
+                bools = {'true' => 1, 'false' => 0}
+                unless search_params[c].blank?
+                  operand = c == "name" ? "like" : "="
+                  if conditions.empty?
+                    conditions = ["#{table_name}.#{c} #{operand} ?"]
+                  else
+                    conditions.first << " AND #{table_name}.#{c} #{operand} ?"
+                  end
+                  if c == 'name'
+                    conditions << "%#{search_params[c]}%"
+                  elsif c.include?('id')
+                    conditions << search_params[c].to_i
+                  elsif bools.keys.include?(search_params[c])
+                    conditions << bools[search_params[c]]
+                  else
+                    conditions << "#{search_params[c]}"
+                  end  
                 end
-                conditions << "%#{term}%"
               end
-              #conditions[0] = "(#{conditions[0]})"
+            else
+              term = search_params
+              unless term.blank?
+                searchable_columns.each do |c|
+                  if conditions.empty?
+                    conditions = ["#{table_name}.#{c} like ?"]
+                  else
+                    conditions.first << "or #{table_name}.#{c} like ?"
+                  end
+                  conditions << "%#{term}%"
+                end
+              end
             end
             where(conditions)
-            #scope = {}
-            #scope[:conditions] = conditions if conditions
-            #scope
           }
         end
       end

@@ -1,9 +1,25 @@
 <% use_page_title "Assets - #{content_type.display_name_plural}" %>
 <div class="padded row-fluid clearfix">
   <h1 class="span3">Assets</h1>
-
   <%= form_for @search_filter, url: engine(content_type).url_for({}), html: {class: 'form-search'}, method: :get do |f| %>
-      <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+      <% if content_type.name == "Freshminds::Advertisement" %>
+        <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+        
+        <%= f.label :responsible_person_email, :class => 'span6 right' %>
+        <%= f.select(:responsible_person_email, Freshminds::Advertisement.pluck(:responsible_person_email).uniq.reject!(&:blank?),{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
+
+        <%= f.label :filled, :class => 'span6 right' %>
+        <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
+
+        <%= f.label :job_type_id, :class => 'span6 right' %>
+        <%= f.collection_select(:job_type_id, Freshminds::JobType.all,:id,:name,{ :include_blank => true }, { :class => 'span6 right', :label => "Job type" }) %>
+
+        <div class="btn-group span6 right">
+          <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
+        </div>
+      <% else %>
+        <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+      <% end %>
   <% end %>
 </div>
 

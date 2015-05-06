@@ -195,12 +195,15 @@ module Cms
 
       scope = model_class.respond_to?(:list) ? model_class.list : model_class
       if scope.searchable?
-        scope = scope.search(@search_filter.term)
+        if @search_filter.term.blank?
+          scope = scope.search(@search_filter.serializable_hash)
+        else
+          scope = scope.search(@search_filter.term)
+        end
       end
-      if params[:section_id] && model_class.respond_to?(:with_parent_id)
+      if params[:section_id].present? && model_class.respond_to?(:with_parent_id)
         scope = scope.with_parent_id(params[:section_id])
       end
-
       @total_number_of_items = scope.count
       @blocks = scope.paginate(options)
       check_permissions
