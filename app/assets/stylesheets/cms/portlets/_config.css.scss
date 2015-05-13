@@ -1,5 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700);
+
+@font-face {
+  font-family: 'SerifaLT-Bold';
+  font-weight: normal;
+  font-style: normal;
+  src: asset-url('2D64DB_0_0.eot?');
+  src: local('☺'), asset-url('2D64DB_0_0.eot?#iefix') format('embedded-opentype'), asset-url('2D64DB_0_0.woff2') format('woff2'), asset-url('2D64DB_0_0.woff') format('woff'), asset-url('2D64DB_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SerifaStd-Bold';
+  font-weight: normal;
+  font-style: normal;
+  src: asset-url('FiraSans-Bold.eot?');
+  src: local('☺'), asset-url('Serifa65Bold.ttf') format('truetype');
+}
+
+
 // LAYOUT
 $layout-max-width: 1425px;
+$desktop-hdtv: 1400px;
+$desktop-small: 1281px;
+$desktop-small-xs: 1124px;
+$desktop-small-xxs: 1060px;
+$tablet: 1024px;
+$mobile: 768px;
 // $layout-max-width: 2200px;
 
 // COLORS
@@ -22,6 +48,7 @@ $color15: #c5c3c4; /* intro header, next to h1  */
 $color16: #58585a; /* free text, copy text  */
 $color17: #aeaeae; /* free text -> h2*/
 $color18: #ababac; /* input placeholders */
+$color19: #b5b5b5;
 
 $error-color: #9c064f;
 
@@ -36,9 +63,17 @@ $border-def: 2px $color12 solid;
 FIXME: too late
 this is interesting as most font sizes are different than 16px - mostly 14, 18, 22, 12...
 */
-$font-size-base: 16px;
+$font-size-base: 30px;
+@media screen and (max-width: $desktop-small) and (min-width: 1024px){
+  $font-size-base: 14px;
+}
+@media screen and (max-width: $layout-max-width) and ($desktop-small){
+  $font-size-base: 16px;
+}
+
 
 /* generic font sizes, to be used in scss */
+$font-size-xxs: rem-calc(12px);
 $font-size-xs: rem-calc(14px);
 $font-size-sm1: rem-calc(16px);
 $font-size-sm: rem-calc(18px);
@@ -50,11 +85,16 @@ $font-size-xxlg: rem-calc(50px);
 $font-size-nav-m: rem-calc(14px);
 $font-size-nav-m2: rem-calc(12px);
 
-$serifa-bold: "SerifaStd-Bold";
+// $serifa-bold: "SerifaStd-Bold";
+$serifa-bold: "SerifaLT-Bold";
 
 $fira-regular: 'FiraSans-Regular';
 $fira-medium: 'FiraSans-Medium';
 $fira-bold: 'FiraSans-Bold';
+
+// $fira-regular: 'SourceSansPro-Regular';
+// $fira-medium: 'SourceSansPro-Semibold';
+// $fira-bold:'SourceSansPro-Bold';
 
 $font-color: #333;
 
@@ -66,3 +106,5 @@ $def-button-text-color: #ffffff;
 // FORMS
 $def-input-border: 2px $color12 solid;
 $def-input-error-border: 2px $color1 solid;
+
+

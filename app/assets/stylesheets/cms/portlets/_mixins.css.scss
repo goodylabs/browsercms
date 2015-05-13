@@ -66,11 +66,202 @@
 
 @mixin font-smoothing($value: antialiased) {
   @if $value == antialiased {
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   @else {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   }
 }
+
+@mixin align-self($value: auto) {
+  // No Webkit Box Fallback.
+  -webkit-align-self: $value;
+  -moz-align-self: $value;
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else {
+    -ms-flex-item-align: $value;
+  }
+  align-self: $value;
+}
+
+@mixin font-family($fontfamily, $fontweight:'normal'){
+  @if $fontfamily == 'SourceSansPro-Regular' {
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
+  } @else if $fontfamily == 'SourceSansPro-Semibold' {
+    font-family: 'Source Sans Pro';
+    font-weight: 600;
+  } @else if $fontfamily == 'SourceSansPro-Bold' {
+    font-family: 'Source Sans Pro';
+    font-weight: 700;
+  } @else if $fontfamily == 'FiraSans-Regular' {
+    font-family: 'Fira Sans';
+    font-weight: 400;
+  } @else if $fontfamily == 'FiraSans-Medium' {
+    font-family: 'Fira Sans';
+    font-weight: 500;
+  } @else if $fontfamily == 'FiraSans-Bold' {
+    font-family: 'Fira Sans';
+    font-weight: 700;
+  } @else {
+    font-family: $fontfamily;
+    font-weight: $fontweight;
+  }
+
+}
+
+
+
+
+
+
+
+
+// prefix declarations
+@mixin prefixed($property, $value) {
+  @if $webkit == true {
+    -webkit-#{$property}: #{$value};
+  }
+
+  @if $moz == true {
+    -moz-#{$property}: #{$value};
+  }
+
+  @if $ms == true {
+    -ms-#{$property}: #{$value};
+  }
+
+  @if $o == true {
+    -o-#{$property}: #{$value};
+  }
+
+  #{$property}: #{$value};
+}
+
+// prefix keyframes
+@mixin keyframes($name) {
+  @if $webkit == true {
+    @-webkit-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $moz == true {
+    @-moz-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $ms == true {
+    @-ms-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $o == true {
+    @-o-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+// prefix declarations
+@mixin prefixed($property, $value) {
+  @if $webkit == true {
+    -webkit-#{$property}: #{$value};
+  }
+
+  @if $moz == true {
+    -moz-#{$property}: #{$value};
+  }
+
+  @if $ms == true {
+    -ms-#{$property}: #{$value};
+  }
+
+  @if $o == true {
+    -o-#{$property}: #{$value};
+  }
+
+  #{$property}: #{$value};
+}
+
+// prefix keyframes
+@mixin keyframes($name) {
+  @if $webkit == true {
+    @-webkit-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $moz == true {
+    @-moz-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $ms == true {
+    @-ms-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $o == true {
+    @-o-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+
+
+
+
+
+@mixin respond($screenName) {
+
+  @if $screenName == 'm' { //mobile
+    @media (max-width: $screen-xs-max) {
+      @content;
+    }
+  }
+  @else if $screenName == 't' { //tablet
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      @content;
+    }
+  }
+  @else if (($screenName == 'mt') or ($screenName == 'tm')){ //mobile and tablet
+    @media (max-width: $screen-sm-max) {
+      @content;
+    }
+  }
+  @else if $screenName == 'd' { //desktop
+    @media (min-width: $screen-md-min) {
+      @content;
+    }
+  }
+
+}
+
+
+
+
+
+
+

@@ -1,13 +1,12 @@
 .sidebar {
-  @include single-transition(top, 0.3s, ease);
-  @include single-transition(position, 0.3s, ease);
+  //@include single-transition(top, 0.3s, ease);
 }
 
 .sidebar__header {
   background: $color11;
   padding: rem-calc(25px) rem-calc(30px) rem-calc(22px);
   font-size: rem-calc(18px);
-  font-family: $fira-medium;
+  @include font-family($fira-medium);
   color: $color13;
 }
 
@@ -36,15 +35,18 @@
 
 .sidebar-left {
   padding-top: rem-calc(30px);
+  @include respond(mt){
+    display: none;
+  }
 }
 
 .sidebar-left__info-list {
-  margin-top: rem-calc(30px);
+  margin-top: rem-calc(44px);
 
   h6 {
 
     font-size: rem-calc(12px);
-    font-family: $fira-bold;
+    @include font-family($fira-bold);
     display: block;
     color: $color3;
     margin-bottom: rem-calc(5px);
@@ -60,7 +62,7 @@
   .text {
     color: #ababac;
     line-height: rem-calc(24px);
-    font-family: $fira-medium;
+    @include font-family($fira-medium);
     font-size: rem-calc(12px);
 
     ul>li{
@@ -73,7 +75,7 @@
       color: $color16;
       @include opacity(0.5);
       line-height: rem-calc(24px);
-      font-family: $fira-medium;
+      @include font-family($fira-medium);
       font-size: rem-calc(18px);
     }
   }
@@ -111,6 +113,15 @@
     color: #c7c5c6;
     text-transform: uppercase;
 
+    h2 {
+      margin-top: rem-calc(3px);
+      line-height: rem-calc(18px);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
     p {
       margin-top: rem-calc(3px);
       line-height: rem-calc(18px);
@@ -123,10 +134,145 @@
 }
 
 .gc-left-container{
-  padding:75px 30px 0 30px;
-
+  padding:10px 30px 0 30px;
+  @include respond(mt) {
+    display:none;
+  }
+  &.col-md-4 {
+    @include respond(t){
+      width: 50%;
+    }
+  }
   .gc-quote {
     display: none;
   }
 
+  &+.col-md-8{
+    @include respond(t) {
+      padding-left:30px !important;
+    }
+    @include respond(m) {
+      &>.html_block{
+        padding-right:0 !important;
+      }
+    }
+
+  }
+
+}
+
+.pagelayout__aside {
+  @include respond(mt) {
+    display:none;
+  }
+}
+
+.offer-sidebar-mobile{
+  display:none;
+}
+
+@include respond(mt) {
+  .sidebar--filters {
+    display: none;
+  }
+
+  .mobile-filters {
+    position: absolute;
+    width: 50%;
+    right: 0; top: 86px;
+    z-index: 100;
+    background: #eeeeee;
+    overflow: hidden;
+    @include scaleY(0);
+    @include opacity(0);
+    @include single-transition(all, 0.3s, ease);
+    transform-origin: top;
+
+    &.mobile-filters--open {
+      @include scaleY(1);
+      @include opacity(1);
+    }
+  }
+
+  .offer-sidebar-mobile {
+    display: block;
+    border-top: 1px #b6b6b6 solid;
+    border-bottom: 1px #b6b6b6 solid;
+    margin-bottom: rem-calc(30px);
+    padding: rem-calc(30px) 0 rem-calc(25px);
+
+    .sidebar-left__info-list {
+      margin-top: 0;
+
+      li:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@include respond(m) {
+  .sidebar--filters {
+    display: none;
+  }
+  .mobile-filters {
+    top: 60px;
+    width: 100%;
+    right: auto;
+    left: 0;
+    background: #edebec;
+
+    @media screen and (max-height: 400px) {
+      overflow: visible;
+    }
+  }
+
+  .mobile-filters--small-device {
+    .filters {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      @include single-transition(all, 0.3s, ease);
+    }
+
+    .mobile-filters__submit {
+      position: relative;
+      z-index: 51;
+      background: #fff;
+      height: auto;
+      width: 100%;
+      // left: 0; bottom: 0;
+      width: 100%;
+      padding: 20px 0;
+      height: 80px;
+
+      .button {
+        display: block;
+        width: 90%;
+        line-height: 40px;
+        margin: 0 auto;
+        height: 40px;
+      }
+    }
+
+    .mobile-filters__submit--landscape {
+      background: none;
+      width: 100%;
+      padding: 0;
+
+      .button {
+        width: 100%;
+      }
+    }
+
+  }
+}
+
+@include respond(mt) {
+  .mobile-filters--small-device {
+    .filters {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      @include single-transition(all, 0.3s, ease);
+    }
+  }
 }

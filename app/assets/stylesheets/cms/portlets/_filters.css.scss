@@ -16,10 +16,41 @@
 }
 // -- remove it
 
+.clear-filters {
+  cursor: pointer;
+  text-align: right;
+
+  .clear-filters__text{
+    @include font-family($fira-regular);
+    text-transform: uppercase;
+    font-size: rem-calc(10px);
+  }
+
+  .clear-filters__close {
+    background: image-url('icons/close.svg');
+    background-size: 17px 17px;
+    width: 17px;
+    height: 17px;
+    @extend .vertical-align;
+    display: inline-block;
+    @include scale(0.5);
+    top: 4px;
+
+  }
+}
+
 
 .filter-section {
   margin-top: rem-calc(15px);
-  clear: both;
+}
+
+.filter-section__close {
+  position: relative;
+  border-bottom: 1px dashed $color8;
+  padding: rem-calc(10px) 0;
+  font-size: rem-calc(12px);
+  @include font-family($fira-bold);
+  color: $color13;
 }
 
 .filter-section__header {
@@ -27,7 +58,7 @@
   border-bottom: 2px solid $color8;
   padding: rem-calc(10px) 0;
   font-size: rem-calc(12px);
-  font-family: $fira-bold;
+  @include font-family($fira-bold);
   @include single-transition(all, 0.3s, ease);
   color: $color13;
 
@@ -50,7 +81,7 @@
     line-height: 1;
     background-color: $color8;
     color: #fff;
-    font-family: $fira-medium;
+    @include font-family($fira-medium);
     font-size: rem-calc(12px);
     text-transform: uppercase;
     cursor: pointer;
