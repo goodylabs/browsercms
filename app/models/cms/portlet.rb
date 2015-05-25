@@ -78,8 +78,8 @@ module Cms
     # @return [Array<Class>]
     def self.types
       @types ||= ActiveSupport::Dependencies.autoload_paths.map do |d|
-        if d =~ /app\/portlets/
-          Dir["#{d}/*_portlet.rb"].map do |p|
+        if d.to_s =~ /app\/portlets/
+          Dir["#{d.to_s}/*_portlet.rb"].map do |p|
             File.basename(p, ".rb").classify.constantize
           end
         end
