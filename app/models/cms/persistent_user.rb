@@ -18,6 +18,7 @@ module Cms
     has_many :user_group_memberships, :class_name => 'Cms::UserGroupMembership', foreign_key: :user_id
     has_many :groups, :through => :user_group_memberships, :class_name => 'Cms::Group', foreign_key: :user_id
     has_many :tasks, :foreign_key => "assigned_to_id", :class_name => 'Cms::Task'
+    belongs_to :team
 
     scope :active, -> { where(["expires_at IS NULL OR expires_at > ?", Time.now.utc]) }
     extend DefaultAccessible
