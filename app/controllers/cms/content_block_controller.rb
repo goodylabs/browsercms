@@ -152,6 +152,10 @@ module Cms
     def clone_record
       old_record = model_class.find(params[:id])
       new_record = old_record.amoeba_dup
+      # Fix for duplicating objects containing polymorphic references (#1020). It's known issue for ameoba not cloning polymorphic associations.
+      if new_record.class.method_defined? 'references'
+        new_record.references = old_record.references
+      end
       new_record.published = false if new_record.publishable?
       new_record.save_draft
       flash[:notice] = "#{content_type.display_name} was clonned"
