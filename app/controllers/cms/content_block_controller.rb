@@ -156,6 +156,9 @@ module Cms
       if new_record.class.method_defined? 'references'
         new_record.references = old_record.references
       end
+      if new_record.is_a? Freshminds::Advertisement
+        new_record.advert_applications = []
+      end
       new_record.published = false if new_record.publishable?
       new_record.save_draft
       flash[:notice] = "#{content_type.display_name} was clonned"
