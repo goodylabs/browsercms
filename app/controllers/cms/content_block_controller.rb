@@ -29,7 +29,7 @@ module Cms
       end
       if params[:commit] == 'Delete'
         deleted = models.select do |m|
-          m.destroy
+          m.delete
         end
         flash[:notice] = "Deleted #{deleted.size} records."
       else
