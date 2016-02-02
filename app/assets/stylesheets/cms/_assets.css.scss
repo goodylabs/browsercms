@@ -18,6 +18,11 @@
 		margin-right: 0;
 	}
 
+  .break-text{
+    word-wrap: break-word;
+    font-size: 14px;
+  }
+
 	.check-cell {
 		@include rem(width,2rem);
 	}

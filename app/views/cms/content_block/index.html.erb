@@ -113,7 +113,7 @@
             <tr id="<%= dom_id(block) %>" class="<%= clazz %>">
               <td class="check-cell"><%= check_box_tag 'content_id[]', block.id %></td>
               <% content_type.columns_for_index.each_with_index do |column, i| %>
-                  <td>
+                  <td class="<%= column[:label].downcase.include?('email') ? 'break-text' : '' %>">
                     <%- val = block.send(column[:method]) %>
                     <%- val_type = val.class %>
                     <%= link_to_if(i == 0, val, edit_engine_aware_path(block)) %>
