@@ -158,6 +158,10 @@ module Cms
       end
       if new_record.is_a? Freshminds::Advertisement
         new_record.advert_applications = []
+        if old_record.closing_at.present?
+          days = ((old_record.closing_at.to_time - old_record.created_at.to_time) / 1.day).to_i
+          new_record.closing_at = Time.now + days.days
+        end
       end
       new_record.published = false if new_record.publishable?
       new_record.save_draft
