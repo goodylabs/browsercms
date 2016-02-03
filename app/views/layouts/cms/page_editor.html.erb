@@ -56,14 +56,16 @@
     </div>
 
     <div class='btn-group'>
-      <%= able_to? :publish_content do %>
-          <%= link_to "Delete",
-                      engine_aware_path(@page),
-                      :id => "delete_button",
-                      title: "Are you sure you want to delete '#{@page.name}'?",
-                      :target => "_top",
-                      :enabled => current_user.able_to_publish?(@page),
-                      class: 'btn btn-small btn-danger http_delete confirm_with_title' %>
+      <% if ['cmsadmin'].include?(current_user.login) %>
+        <%= able_to? :publish_content do %>
+            <%= link_to "Delete",
+                        engine_aware_path(@page),
+                        :id => "delete_button",
+                        title: "Are you sure you want to delete '#{@page.name}'?",
+                        :target => "_top",
+                        :enabled => current_user.able_to_publish?(@page),
+                        class: 'btn btn-small btn-danger http_delete confirm_with_title' %>
+        <% end %>
       <% end %>
     </div>
     <%= render 'mobile_toolbar' %>
