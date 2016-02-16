@@ -32,6 +32,10 @@ module Cms
           m.delete
         end
         flash[:notice] = "Deleted #{deleted.size} records."
+      elsif params[:commit] == 'Close'
+        models.select do |m|
+          m.update_attribute(:filled, true)
+        end
       else
         # Need to do these one at a time since the code logic is more complex than single UPDATE.
         published = models.select do |m|
