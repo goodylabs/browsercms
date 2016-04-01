@@ -70,10 +70,60 @@
       </div>
     <% end %>
 
+    <% if content_type.name == "Freshminds::OnesToWatch" %>
+      <div class="main-content padded row-fluid">
+        <div class="span6">
+          <a href="#" class="show-universities">Universities stats</a>
+          <table class="table table-bordered assets hidden universities">
+            <thead>
+              <tr>
+                <th>University name</th>
+                <th>Nominees</th>
+              </tr>
+            </thead>
+            <% Freshminds::OnesToWatch.count(:all, group: 'university').map{ |k,v| { k.name => v } }.sort {|a1,a2| a2[1]<=>a1[1]}.each do |el| %>
+            <tbody>
+              <tr>
+                <td><%= el.keys.join %></td>
+                <td><%= el.values.join %></td>
+              </tr>
+            </tbody>
+            <% end %>
+          </table>
+        </div>
+        <div class="span6">
+          <a href="#" class="show-nominators">Nominator stats</a>
+          <table class="table table-bordered assets hidden nominators">
+            <thead>
+              <tr>
+                <th>Nominator last name</th>
+                <th>Nominees</th>
+              </tr>
+            </thead>
+            <% Freshminds::OnesToWatch.count(:all, group: 'nominator_last_name').sort {|a1,a2| a2[1]<=>a1[1]}.each do |el| %>
+            <tbody>
+              <tr>
+                <td><%= el.first %></td>
+                <td><%= el.last %></td>
+              </tr>
+            </tbody>
+            <% end %>
+          </table>
+        </div>
+      </div>
+      <script type="text/javascript">
+        jQuery(function($){
+          $(".show-nominators").click(function() {
+            $("table.nominators").toggle();
+          });
+          $(".show-universities").click(function() {
+            $("table.universities").toggle();
+          });
+        });
+      </script>
+    <% end %>
 
-
-
-    <div class="main-content padded row-fluid clearfix">
+    <div class="main-content padded row-fluid">
       <table class="table table-bordered assets">
         <thead>
         <tr>
