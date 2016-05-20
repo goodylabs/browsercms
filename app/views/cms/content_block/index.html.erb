@@ -17,6 +17,8 @@
         <div class="btn-group span6 right">
           <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
         </div>
+      <% elsif content_type.name == "Freshminds::OnesToWatch" %>
+        <%= link_to 'Download all CVs', "/ones_to_watches/download_files", :class => 'span3 right btn btn-small btn-primary primary-ct' %>
       <% else %>
         <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
       <% end %>
