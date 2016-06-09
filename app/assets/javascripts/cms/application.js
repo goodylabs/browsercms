@@ -14,6 +14,7 @@
 //= require picedit
 //= require jquery.plugin
 //= require jquery.maxlength
+//= require jquery.spellchecker
 //= require cms/attachment_manager
 //= require cms/form_builder
 //= require cms/sitemap
