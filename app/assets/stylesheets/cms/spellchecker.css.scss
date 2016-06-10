@@ -47,9 +47,11 @@
 
 .spellchecker-incorrectwords {
   display: none;
+  padding: 10px 5px;
   a {
     display: inline-block;
     margin-right: .5em;
+    color: #e74c3c
   }
 }
 
