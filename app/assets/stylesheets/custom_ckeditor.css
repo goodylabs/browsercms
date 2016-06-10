@@ -1,0 +1,5 @@
+.spellchecker-word-highlight {
+  color: red;
+  cursor: pointer;
+  border-bottom: 1px dotted red;
+}

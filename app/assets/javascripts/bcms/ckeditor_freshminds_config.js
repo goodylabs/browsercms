@@ -16,5 +16,5 @@ CKEDITOR.stylesSet.add( 'freshminds_styles', [
 ]);
 
 CKEDITOR.config.stylesSet = 'freshminds_styles';
-CKEDITOR.config.contentsCss = '/assets/ckeditor.css' ;
+CKEDITOR.config.contentsCss = ['/assets/ckeditor.css', '/assets/custom_ckeditor.css'];
 CKEDITOR.config.extraAllowedContent = 'a(*){*}[*]'

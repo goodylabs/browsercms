@@ -4,7 +4,7 @@
 CKEDITOR.config.toolbar_inline =
     [
         { name:'clipboard', items:[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-        { name:'editing', items:[ 'Scayt' ] },
+        { name:'spellcheck', items: [ 'jQuerySpellChecker' ] },
         { name:'insert', items:[ 'Image', 'Link', 'Unlink', 'Anchor' ] },
         { name:'insert', items:[ 'Image', 'oembed', 'Link', 'Unlink', 'Anchor' ] },
         { name:'content', items:[ 'EditContent','MoveContentUp','MoveContentDown','DeleteContent']},

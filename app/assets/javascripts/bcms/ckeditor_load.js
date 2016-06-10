@@ -45,7 +45,7 @@ function loadEditor(id) {
             editor.config.toolbar = 'Standard';
             editor.config.width = '100%';
             editor.config.height = 400;
-            editor.config.extraPlugins = 'oembed';
+            editor.config.extraPlugins = 'oembed,jqueryspellchecker';
         }
         $.cookie('editorEnabled', true, { expires:90, path:'/' });
         return true;
