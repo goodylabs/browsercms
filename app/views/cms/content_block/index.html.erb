@@ -2,26 +2,35 @@
 <div class="padded row-fluid clearfix">
   <h1 class="span3">Assets</h1>
   <%= form_for @search_filter, url: engine(content_type).url_for({}), html: {class: 'form-search'}, method: :get do |f| %>
-      <% if content_type.name == "Freshminds::Advertisement" %>
-        <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
-        
-        <%= f.label :responsible_person_email, :class => 'span6 right' %>
-        <%= f.select(:responsible_person_email, Freshminds::Advertisement.pluck(:responsible_person_email).uniq.reject!(&:blank?),{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
-
-        <%= f.label :filled, :class => 'span6 right' %>
-        <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
-
-        <%= f.label :job_type_id, :class => 'span6 right' %>
-        <%= f.collection_select(:job_type_id, Freshminds::JobType.all,:id,:name,{ :include_blank => true }, { :class => 'span6 right', :label => "Job type" }) %>
-
-        <div class="btn-group span6 right">
-          <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
-        </div>
-      <% elsif content_type.name == "Freshminds::OnesToWatch" %>
-        <%= link_to 'Download all CVs', "/ones_to_watches/download_files", :class => 'span3 right btn btn-small btn-primary primary-ct' %>
-      <% else %>
-        <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
-      <% end %>
+    <% if content_type.name == "Freshminds::Advertisement" %>
+      <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+      <%= f.label :responsible_person_email, :class => 'span6 right' %>
+      <%= f.select(:responsible_person_email, Freshminds::Advertisement.pluck(:responsible_person_email).uniq.reject!(&:blank?),{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
+      <%= f.label :filled, :class => 'span6 right' %>
+      <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
+      <%= f.label :job_type_id, :class => 'span6 right' %>
+      <%= f.collection_select(:job_type_id, Freshminds::JobType.all,:id,:name,{ :include_blank => true }, { :class => 'span6 right', :label => "Job type" }) %>
+      <div class="btn-group span6 right">
+        <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
+      </div>
+    <% elsif content_type.name == "Freshminds::OnesToWatch" %>
+      <%= f.label :first_name, :class => 'span6 right' %>
+      <%= f.text_field :first_name, class: "span6 search-query right", placeholder: "First name" %>
+      <%= f.label :surname, :class => 'span6 right' %>
+      <%= f.text_field :surname, class: "span6 search-query right", placeholder: "Surname" %>
+      <%= f.label :nominator_last_name, :class => 'span6 right' %>
+      <%= f.text_field :nominator_last_name, class: "span6 search-query right", placeholder: "Nominator last name" %>
+      <%= f.label :university_id, :class => 'span6 right' %>
+      <%= f.select(:university_id, Freshminds::OnesToWatch.all.collect{ |p| [ p.university_name, p.id ] }.uniq,{ :include_blank => true }, { :class => 'span6 right', :label => "University" }) %>
+      <div class="btn-group span6 right">
+        <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
+      </div>
+    <% else %>
+      <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+    <% end %>
+  <% end %>
+  <% if content_type.name == "Freshminds::OnesToWatch" %>
+    <%= link_to 'Download all CVs', "/ones_to_watches/download_files", :class => 'span3 btn btn-small btn-primary primary-ct' %>
   <% end %>
 </div>
 
@@ -121,6 +130,10 @@
           $(".show-universities").click(function() {
             $("table.universities").toggle();
           });
+          $(".check-all").click(function(e){
+            var table= $(e.target).closest('table');
+            $('td input:checkbox',table).prop('checked',this.checked);
+          });
         });
       </script>
     <% end %>
@@ -129,9 +142,7 @@
       <table class="table table-bordered assets">
         <thead>
         <tr>
-          <th class="check-cell"><%#<input type="checkbox">
-        # Only single select for time being.
-                                 %></th>
+          <th class="check-cell"><input type="checkbox" class="check-all"></th>
           <% content_type.columns_for_index.each_with_index do |column, i| %>
               <th>
                 <% if column[:order] %>
@@ -193,3 +204,12 @@
   <% end %>
 
 </div>
+
+<script type="text/javascript">
+  jQuery(function($){
+    $(".check-all").click(function(e){
+      var table= $(e.target).closest('table');
+      $('td input:checkbox',table).prop('checked',this.checked);
+    });
+  });
+</script>
