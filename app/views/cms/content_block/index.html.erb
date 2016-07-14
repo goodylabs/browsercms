@@ -21,7 +21,7 @@
       <%= f.label :nominator_last_name, :class => 'span6 right' %>
       <%= f.text_field :nominator_last_name, class: "span6 search-query right", placeholder: "Nominator last name" %>
       <%= f.label :university_id, :class => 'span6 right' %>
-      <%= f.select(:university_id, Freshminds::OnesToWatch.all.collect{ |p| [ p.university_name, p.id ] }.uniq,{ :include_blank => true }, { :class => 'span6 right', :label => "University" }) %>
+      <%= f.select(:university_id, Freshminds::OnesToWatch.all.collect{ |p| [ p.university_name, p.university_id ] }.uniq,{ :include_blank => true }, { :class => 'span6 right', :label => "University" }) %>
       <div class="btn-group span6 right">
         <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
       </div>
