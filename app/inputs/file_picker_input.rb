@@ -48,7 +48,7 @@ class FilePickerInput < SimpleForm::Inputs::Base
           html << "<a class='btn btn-mini btn-danger #{css_class}' href='#' data-purpose='destroy-attachment' data-id='#{a.object.id}'>Delete attachment</a>"
           html << '</div>'
           if a.object.is_image?
-            html << "<img src='#{Rails.configuration.action_controller.asset_host}#{a.object.versioned_url}'>"
+            html << "<img src='#{Rails.configuration.action_controller.asset_host}#{a.object.attachment_version_path}'>"
           else
             html << "<video controls='controls' src='#{Rails.configuration.action_controller.asset_host}#{a.object.versioned_url}'></video>"
           end
