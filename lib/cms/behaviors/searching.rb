@@ -22,10 +22,11 @@ module Cms
                 bools = {'true' => 1, 'false' => 0}
                 unless search_params[c].blank?
                   operand = c == "name" ? "like" : "="
+                  query = c.include?('_date') ? "date(#{table_name}.#{c.gsub('_date', '')})" : "#{table_name}.#{c}"
                   if conditions.empty?
-                    conditions = ["#{table_name}.#{c} #{operand} ?"]
+                    conditions = ["#{query} #{operand} ?"]
                   else
-                    conditions.first << " AND #{table_name}.#{c} #{operand} ?"
+                    conditions.first << " AND #{query} #{operand} ?"
                   end
                   if c == 'name'
                     conditions << "%#{search_params[c]}%"
@@ -33,6 +34,8 @@ module Cms
                     conditions << search_params[c].to_i
                   elsif bools.keys.include?(search_params[c])
                     conditions << bools[search_params[c]]
+                  elsif c.include?('_date')
+                    conditions << Time.parse(search_params[c]).strftime('%Y-%m-%d')
                   else
                     conditions << "#{search_params[c]}"
                   end  
