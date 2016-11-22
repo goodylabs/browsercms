@@ -222,7 +222,10 @@ module Cms
       @total_number_of_items = scope.count
       @blocks = scope.paginate(options)
       check_permissions
-
+      respond_to do |format|
+        format.html
+        format.csv { send_data scope.to_full_csv(scope) }
+      end
     end
 
     def load_block

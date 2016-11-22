@@ -43,6 +43,9 @@
   <% if content_type.name == "Freshminds::OnesToWatch" %>
     <%= link_to 'Download all CVs', "/ones_to_watches/download_files", :class => 'span3 btn btn-small btn-primary primary-ct' %>
   <% end %>
+  <% if content_type.name == "Freshminds::Advertisement" %>
+    <a href="<%= request.url.gsub('/advertisements','/advertisements.csv') %>" class='span3 btn btn-small btn-primary primary-ct'>Download CSV</a>
+  <% end %>
 </div>
 
 
