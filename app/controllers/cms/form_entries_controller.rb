@@ -12,23 +12,23 @@ module Cms
     def submit
       find_form_and_populate_entry
       if @entry.save
+        unless @form.notification_email.blank?
+          Cms::EmailMessage.create!(
+              recipients: @form.notification_email,
+              subject: "[CMS Form] A new entry has been created",
+              body: "A visitor has filled out the #{@form.name} form. The entry can be found here:
+              #{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }"
+          )
+        end
         if @form.show_text?
           flash[:success] = @form.confirmation_text
           begin
-            redirect_to :back
+            redirect_to :back and return
           rescue ActionController::RedirectBackError
-            redirect_to root_path
+            redirect_to root_path and return
           end
         else
-          redirect_to @form.confirmation_redirect
-        end
-        unless @form.notification_email.blank?
-          Cms::EmailMessage.create!(
-              :recipients => @form.notification_email,
-              :subject => "[CMS Form] A new entry has been created",
-              :body => "A visitor has filled out the #{@form.name} form. The entry can be found here:
-              #{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }"
-          )
+          redirect_to @form.confirmation_redirect and return
         end
       else
         show_content_as_page(@form)
