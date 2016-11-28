@@ -40,7 +40,7 @@ module Cms
     # We want content_for to be called on the controller's view, not this inner view
     def content_for(name, content=nil, &block)
       Rails.logger.warn "content_for(#{name}, #{content}, block) called."
-      @controller.instance_variable_get("@template").content_for(name, content, &block)
+      @controller.instance_variable_get("@template").content_for(name, content, &block) unless @controller.instance_variable_get("@template").nil?
     end
 
     # Returns the routes for the Cms::Engine for view that need to access them.
