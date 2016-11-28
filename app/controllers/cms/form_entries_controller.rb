@@ -13,8 +13,12 @@ module Cms
       find_form_and_populate_entry
       if @entry.save
         if @form.show_text?
-          show_content_as_page(@form)
-          render layout: Cms::Form.layout
+          flash[:success] = @form.confirmation_text
+          begin
+            redirect_to :back
+          rescue ActionController::RedirectBackError
+            redirect_to root_path
+          end
         else
           redirect_to @form.confirmation_redirect
         end
