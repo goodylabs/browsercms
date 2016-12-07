@@ -1,5 +1,7 @@
 class Cms::Page < ActiveRecord::Base
 
+  attr_accessor :redirect_url
+
   def actual_path
     path
   end

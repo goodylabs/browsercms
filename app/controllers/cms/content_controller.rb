@@ -76,6 +76,7 @@ module Cms
     def render_page
       prepare_connectables_for_render
       prepend_view_path DynamicView.resolver
+      redirect_to @page.redirect_url and return unless @page.redirect_url.blank?
       respond_with @page, determine_page_layout
     end
 
