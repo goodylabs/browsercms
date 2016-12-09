@@ -225,6 +225,7 @@ module Cms
       respond_to do |format|
         format.html
         format.csv { send_data scope.to_full_csv(scope) }
+        format.json { render :inline => @blocks.map { |e| e.name }.to_json }
       end
     end
 
