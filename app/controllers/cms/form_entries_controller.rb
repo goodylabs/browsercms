@@ -24,6 +24,9 @@ module Cms
                         <td align='justify;' style='font-family: <%= mail_font_family %>;'>
                           #{@entry.data_columns.map{ |k,v| "#{k.humanize}:<strong>#{v}</strong><br/>"}.join}
                         </td>
+                        <td>
+                          #{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }
+                        </td>
                       </tr>
                     </table>
                   </td>
