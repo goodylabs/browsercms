@@ -16,8 +16,19 @@ module Cms
           Cms::EmailMessage.create!(
               recipients: @form.notification_email,
               subject: "[CMS Form] A new entry has been created",
-              body: "A visitor has filled out the #{@form.name} form. The entry can be found here:
-              #{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }"
+              body: "<table cellpadding='0' cellspacing='0' width='100%'>
+                <tr>
+                  <td style='padding:30px'>
+                    <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                      <tr>
+                        <td align='justify;' style='font-family: <%= mail_font_family %>;'>
+                          #{@entry.data_columns.map{ |k,v| "#{k.humanize}:<strong>#{v}</strong><br/>"}.join}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>".html_safe
           )
         end
         if @form.show_text?
