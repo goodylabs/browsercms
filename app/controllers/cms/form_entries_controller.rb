@@ -15,17 +15,15 @@ module Cms
         unless @form.notification_email.blank?
           Cms::EmailMessage.create!(
               recipients: @form.notification_email,
-              subject: "[CMS Form] A new entry has been created",
+              subject: "[#{@form.name}] A new entry has been created",
               body: "<table cellpadding='0' cellspacing='0' width='100%'>
                 <tr>
                   <td style='padding:30px'>
                     <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                      #{@entry.data_columns.map{ |k,v| "<tr><td align='justify;'>#{k.humanize}:<strong>#{v}</strong></td></tr>"}.join}
                       <tr>
-                        <td align='justify;' style='font-family: <%= mail_font_family %>;'>
-                          #{@entry.data_columns.map{ |k,v| "#{k.humanize}:<strong>#{v}</strong><br/>"}.join}
-                        </td>
                         <td>
-                          #{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }
+                          Link: <strong>#{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }</strong>
                         </td>
                       </tr>
                     </table>
