@@ -20,7 +20,7 @@ module Cms
                 <tr>
                   <td style='padding:30px'>
                     <table border='0' cellpadding='0' cellspacing='0' width='100%'>
-                      #{@entry.data_columns.map{ |k,v| "<tr><td align='justify;'>#{k.humanize}:<strong>#{v}</strong></td></tr>"}.join}
+                      #{@entry.data_columns.map{ |k,v| "<tr><td align='justify;'>#{k.humanize}: <strong>#{v}</strong></td></tr>"}.join}
                       <tr>
                         <td>
                           Link: <strong>#{Cms::EmailMessage.absolute_cms_url(cms.form_entry_path(@entry)) }</strong>
