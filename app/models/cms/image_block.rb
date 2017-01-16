@@ -15,6 +15,11 @@ module Cms
       file
     end
 
+    def proper_url
+      (!self.url.include?('http://') && !self.url.include?('https://')) ? "http://#{self.url}"  : self.url
+    end
+
+
      # Override default behavior to handle STI class when looking up other versions of attachments.
     def attachable_type
       Cms::Attachment::FILE_BLOCKS

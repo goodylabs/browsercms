@@ -1,4 +1,8 @@
-<%= tag :img,
-        :src => attachment_path_for(@content_block.file),
-        :alt => h(@content_block.name),
-        :data => { :type => "image_block" } %>
+<% if @content_block.url.blank? %>
+  <%= tag :img,
+          :src => attachment_path_for(@content_block.file),
+          :alt => h(@content_block.name),
+          :data => { :type => "image_block" } %>
+<% else %>
+  <%= link_to (tag :img, :src => attachment_path_for(@content_block.file), :alt => h(@content_block.name), :data => { :type => "image_block" }), @content_block.proper_url, target: '_blank' %>
+<% end %>
