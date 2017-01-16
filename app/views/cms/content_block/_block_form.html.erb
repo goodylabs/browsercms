@@ -6,7 +6,6 @@
     <%= render 'hidden_fields', f: f %>
     <div class="padded row-fluid">
       <div class="span8 main-content">
-        <% binding.pry %>
         <%= render block_form, f: f %>
       </div>
       <%= render partial: 'sidebar', layout: 'sidebar_layout' unless @block.new_record? %>
