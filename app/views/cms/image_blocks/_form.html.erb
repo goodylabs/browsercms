@@ -1,4 +1,5 @@
 <%= f.input :name %>
 <%= f.input :url %>
+<%= f.input :target, collection: [['New Window', '_blank'], ['Same window', '_self']], as: :select %>
 <%= f.input :file, label: "Image", hint: "Select a file to upload.", as: :file_picker %>
 <%= f.cms_tag_list %>
