@@ -6,5 +6,5 @@
 CKEDITOR.config.toolbar_Standard = [
   ['Source','-','Cut','Copy','Paste','PasteText','PasteFromWord','-','jQuerySpellChecker','-','Undo','Redo','Find','Replace','RemoveFormat','-','NumberedList','BulletedList','Outdent','Indent','HorizontalRule'],
   '/',
-  ['Link','Unlink','Anchor','Image','oembed','Table','SpecialChar','-','Bold','Italic','Underline','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','TextColor','Styles']
+  ['Link','Unlink','Anchor','Image','oembed','Table','SpecialChar','-','FontSize','Bold','Italic','Underline','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','TextColor','BGColor','Styles']
 ];
