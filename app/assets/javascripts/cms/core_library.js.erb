@@ -208,3 +208,20 @@ jQuery(function($) {
     }
 
 });
+
+$( document ).ready(function() {
+  $("a.gc-link-more[href*=#]").click(function(e) {
+    var target = $(e.target),
+        element;
+    e.preventDefault();
+    if(target.is('a')){
+      $("a[id="+target.attr('href').replace('#', '')+"]")
+      element = $("a[id="+target.attr('href').replace('#', '')+"]")
+    } else {
+      element = $("a[id="+target.closest('a').attr('href').replace('#', '')+"]")
+    }
+    $('html, body').animate({
+      scrollTop: element.offset().top - 120
+    });
+  }); 
+});
