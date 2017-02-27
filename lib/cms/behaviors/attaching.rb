@@ -231,7 +231,7 @@ module Cms
         # Locates the attachment with a given name
         # @param [Symbol] name The name of the attachment
         def attachment_named(name)
-          attachments.select { |item| item.attachment_name.to_sym == name }.first
+          attachments.uniq.select { |item| item.attachment_name.to_sym == name && (item.published && !item.deleted && !item.archived) }.last
         end
 
         def unassigned_attachments
