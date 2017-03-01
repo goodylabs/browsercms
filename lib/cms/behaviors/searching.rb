@@ -22,7 +22,19 @@ module Cms
                 bools = {'true' => 1, 'false' => 0}
                 unless search_params[c].blank?
                   operand = c == "name" ? "like" : "="
-                  query = c.include?('_date') ? "date(#{table_name}.#{c.gsub('_date', '')})" : "#{table_name}.#{c}"
+                  if c.include?('_date')
+                    if c.include?('_date_lt')
+                      operand = '<='
+                      query = "#{table_name}.#{c.gsub('_date_lt', '')}"
+                    elsif c.include?('_date_gt')
+                      operand = '>='
+                      query = "#{table_name}.#{c.gsub('_date_gt', '')}"
+                    else
+                      query = "date(#{table_name}.#{c.gsub('_date', '')})"
+                    end
+                  else
+                    query = "#{table_name}.#{c}"
+                  end
                   if conditions.empty?
                     conditions = ["#{query} #{operand} ?"]
                   else
@@ -38,7 +50,7 @@ module Cms
                     conditions << Time.parse(search_params[c]).strftime('%Y-%m-%d')
                   else
                     conditions << "#{search_params[c]}"
-                  end  
+                  end
                 end
               end
             else
