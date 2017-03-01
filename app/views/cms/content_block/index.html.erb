@@ -36,6 +36,17 @@
       <div class="btn-group span6 right">
         <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
       </div>
+    <% elsif content_type.name == "Freshminds::CallBackRequest" %>
+      <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+      <%= f.label :created_at_date, :class => 'span6 right' %>
+      <%= f.text_field :created_at_date, class: "span6 date_picker right", placeholder: "Created at" %>
+      <%= f.label :hire_id, :class => 'span6 right' %>
+      <%= f.select(:hire_id, categories_for('Call Back').collect{ |p| [ p.name, p.id ] }, { :include_blank => true }, { :class => 'span6 right', :label => "Hire" }) %>
+      <%= f.label :origin_id, :class => 'span6 right' %>
+      <%= f.select(:origin_id, categories_for('Call Back Origin').collect{ |p| [ p.name, p.id ] }, { :include_blank => true }, { :class => 'span6 right', :label => "Origin" }) %>
+      <div class="btn-group span6 right">
+        <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
+      </div>
     <% else %>
       <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
     <% end %>
