@@ -32,7 +32,7 @@ module Cms
     class << self
 
       def permitted_params
-        super + [{:group_ids => []}]
+        super + [{:group_ids => []}, :password, :password_confirmation]
       end
 
       # Returns all users that can :edit_content or :publish_content permissions.
