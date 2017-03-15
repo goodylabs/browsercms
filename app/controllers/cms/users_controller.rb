@@ -2,7 +2,7 @@ module Cms
   class UsersController < Cms::ResourceController
     include Cms::AdminTab
 
-    check_permissions :administrate, :except => [:change_password, :update_password]
+    check_permissions :administrate, :except => [:change_password, :update_password, :show, :edit, :update]
     before_filter :only_self_or_administrator, :only => [:change_password, :update_password]
     after_filter :update_flash, :only => [:update]
 
