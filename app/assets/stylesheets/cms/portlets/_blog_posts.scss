@@ -1,0 +1,391 @@
+
+.html_block{
+  .devise__shared-links{
+    padding-bottom: 35px;
+    &.no-padding {
+      padding-bottom: 0;
+    }
+    a{
+      color: #58585a;
+      font-size: rem-calc(12px);
+      line-height: 1.2em;
+      @include font-family($fira-bold);
+      text-transform: uppercase;
+      &:visited{
+        color: #58585a;
+      }
+    }
+  }
+}
+
+
+.connectable, .html_block {
+  h1 {
+    @extend %t-h1; 
+    line-height:1;
+    margin:76px 0 70px -60px;
+    padding-left:60px;
+    background: image-url('icons/asterisk.svg') no-repeat 0 0;
+    @include background-size(30px);
+
+    @include respond(t) {
+      margin:40px 0 45px 0;
+      font-size:42px;
+      line-height:36x;
+    }
+    @include respond(m) {
+      margin:20px 0 30px 0;
+      margin-left:0;
+      font-size:26px;
+      line-height:34px;
+      @include background-size(28px);
+      padding-left: 42px;
+    }
+  }
+}
+
+.cke_editable , .html_block{
+  line-height:rem-calc(26px);
+  word-wrap: break-word;
+
+  h1,.gc-title, + h1{
+    @extend %t-h1;
+    line-height:1;
+    margin:76px 0 70px -60px;
+    padding-left:60px;
+    background: image-url('icons/asterisk.svg') no-repeat 0 0;
+    @include background-size(30px);
+
+    @include respond(t) {
+      margin:40px 0 45px 0;
+      font-size:42px;
+      line-height:36x;
+    }
+    @include respond(m) {
+      margin:20px 0 30px 0;
+      margin-left:0;
+      font-size:26px;
+      line-height:34px;
+      @include background-size(28px);
+      padding-left: 42px;
+    }
+
+  }
+
+  form {
+    margin-bottom: 30px;
+  }
+
+  .gc-sub-title, h1 + h2, h2{
+    @extend %t-h2--text;
+    margin-top:40px;
+    margin-bottom: 40px;
+    @include respond(m) {
+      font-size:rem-calc(18px) !important;
+      margin-top:20px;
+      margin-bottom: 30px;
+    }
+    @include respond(t) {
+      font-size:rem-calc(22px);
+      margin-top:26px;
+      margin-bottom: 26px;
+    }
+  }
+
+  h2,.gc-section-header {
+    @extend %t-h2--text;
+    margin-top:60px;
+    margin-bottom: 22px;
+    @include respond(t) {
+      margin-top:30px;
+      margin-bottom:15px;
+    }
+    @include respond(m) {
+      margin-top:20px;
+      margin-bottom:10px;
+    }
+  }
+
+  h3{
+    @extend %t-h3;
+  }
+
+  .gc-section-content{
+    @include pie-clearfix;
+  }
+  p, .gc-section-content {
+    @extend %t-text;
+    margin-bottom:35px;
+
+    &>img{
+      float:left;
+      margin:0px 35px 8px 0;
+      width: 100%;
+    }
+
+  }
+
+  .gc-img-left{
+    float:left;
+    margin:15px 35px 15px 0;
+
+    & + h2, & + p, & + h3, & + h4{
+      margin-top:48px;
+      @include respond(m) {
+        margin-top:10px;
+      }
+    }
+
+    @include respond(m) {
+      float:none;
+      margin-right:0;
+      margin-left:0;
+    }
+
+  }
+  .gc-img-right{
+    float:right;
+    margin:15px 0 15px 35px;
+    @include respond(m) {
+      float:none;
+      margin-right:0;
+      margin-left:0;
+    }
+  }
+
+  .gc-quote {
+    color:#ee4d9b;
+    font-size:18px;
+    @include font-family($fira-medium);
+    padding:30px 30px 30px 8px;
+    line-height:27px;
+    background:image-url('icons/quote.png') no-repeat 5px 0;
+    &+.gc-quote{
+      margin-top:60px;
+    }
+  }
+
+  .gc-link-more {
+    @extend .link-more;
+    &:hover {
+      background-image:image-url('icons/arrow_links_small_pink.svg');
+    }
+  }
+
+  ul{
+    margin-bottom:35px;
+    li {
+      list-style: none;
+      @include font-family($fira-regular);
+      font-size: $font-size-sm;
+      @include respond(m) {
+        font-size:$font-size-sm1;
+      }
+      color: #58585a;
+      padding: 5px 0 5px 35px;
+      margin-bottom:25px;
+      @include pie-clearfix();
+      background: image-url('icons/asterisk.svg') no-repeat 0 8px;
+      @include background-size(15px);
+    }
+  }
+
+  .gc-list-collapsed{
+    margin-bottom:30px;
+    & li{
+      margin-bottom:12px;
+      padding-top:0;
+      padding-bottom:0;
+      background-position:0 4px;
+      line-height:rem-calc(26px);
+    }
+  }
+
+  ol{
+    margin-bottom:70px;
+    counter-reset:my-counter;
+    padding-right:55px;
+    li{
+      position:relative;
+      min-height:75px;
+      margin-bottom:25px;
+      &:before{
+        counter-increment:my-counter;
+        content: counter(my-counter, decimal);
+        position:absolute;
+        left:-105px;
+        width:70px;
+        height:70px;
+        @include border-radius(35px);
+        background-color:$color1;
+        color:#fff;
+        font-size:$font-size-xlg;
+        @include font-family($fira-medium);
+        line-height:72px;
+        text-align:center;
+      }
+
+    }
+  }
+
+  .embeddedContent {
+    @include pie-clearfix;
+    margin:65px 0;
+    margin-right: -65px;
+    @include respond(m){
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+
+  a{
+    @include single-transition(color, 0.3s, ease);
+
+    &.gc-link-more {
+      color: $color3;
+    }
+
+    &.button {
+      color: #ffffff;
+      &:hover {
+        color: #ffffff;
+      }
+      &:visited {
+        color: #ffffff;
+      }
+    }
+
+    color:$color1;
+
+    &:hover {
+      color:$color1;
+    }
+    &:visited {
+      color:$color1;
+    }
+  }
+
+  table{ 
+    width:100%;
+  }
+  th{
+    background-color:$color8;
+    @include font-family($fira-medium);
+    font-size:$font-size-md;
+  }
+  td, th{
+    padding:15px;
+    border:1px solid $color17;
+  }
+  td{
+    font-size:$font-size-sm;
+    p {
+      margin-bottom: 2px !important;
+    }
+  }
+}
+
+
+/*
+'t-' as in Typography
+*/
+
+%t-h1{
+  font-weight:normal;
+  color:$color16;
+  @include font-family($fira-bold);
+  font-size: $font-size-xlg;
+  @include respond(m) {
+    font-size:rem-calc(26px);
+  }
+
+}
+%t-h2{
+  font-weight:normal;
+  color: $color17;
+  font-family: $serifa-bold;
+  font-size: $font-size-lg;
+}
+%t-h3{
+  font-weight: normal;
+  @include font-family($fira-medium);
+  font-size: $font-size-sm;
+  color: $color17;
+  margin-bottom: 20px;
+}
+%t-h4{
+  font-weight:normal;
+  @include font-family($fira-medium);
+  font-size: $font-size-sm;
+}
+%t-h5{
+  font-weight:normal;
+  @include font-family($fira-medium);
+  font-size: $font-size-xs;
+}
+
+.t-h1{
+  @extend %t-h1;
+}
+.t-h2{
+  @extend %t-h2;
+}
+.t-h3{
+  @extend %t-h3;
+}
+.t-h4{
+  @extend %t-h4;
+}
+.t-h5{
+  @extend %t-h5;
+}
+.t-h6{}
+
+
+
+/*
+next to H1, ex. "Team member" page
+*/
+.t-h-intro{
+  font-size:$font-size-md;
+  color:$color15;
+}
+
+%t-h2--text{
+  @include font-family($fira-medium);
+  color:$color17;
+  font-size:$font-size-md;
+}
+
+%t-text {
+  font-size:$font-size-sm;
+  color:$color16;
+  line-height:rem-calc(27px);
+  @include respond(m) {
+    font-size:$font-size-sm1;
+  }
+  a {
+    @include respond(m) {
+      font-size:$font-size-sm1;
+    }
+  }
+}
+
+/*
+text, free/cms text/main copy
+*/
+.t-text{
+  @extend %t-text;
+
+  h2{
+    @extend %t-h2--text;
+  }
+
+  p{
+    margin-bottom:20px;
+  }
+}
+
+.t-h2--text{
+  @extend %t-h2--text;
+}
