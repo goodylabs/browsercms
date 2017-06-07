@@ -18,6 +18,8 @@
 <%= f.input :keywords, :hint => "(Optional) Used for the meta-keyword meta element of the page." %>
 <%= f.input :language %>
 
+<%= f.input :featured_image, hint: "Select featured image to upload." %>
+
 <% if @other_version %>
     <%= render :partial => "cms/shared/version_conflict_diff", :locals => {:other_version => @other_version, :your_version => @page} %>
 <% end %>

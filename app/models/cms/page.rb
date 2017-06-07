@@ -14,6 +14,8 @@ class Cms::Page < ActiveRecord::Base
   is_userstamped
   is_versioned
 
+  has_attached_file :featured_image
+
   has_many :connectors, -> { order("#{Cms::Connector.table_name}.container, #{Cms::Connector.table_name}.position") }, :class_name => 'Cms::Connector'
   has_many :page_routes, :class_name => 'Cms::PageRoute'
   has_many :tasks
@@ -59,7 +61,7 @@ class Cms::Page < ActiveRecord::Base
 
     # @override
     def permitted_params
-      super + [:visibility, :publish_on_save]
+      super + [:visibility, :publish_on_save, :featured_image]
     end
   end
   # currently_connected_to tightens the scope of connected_to by restricting to the
