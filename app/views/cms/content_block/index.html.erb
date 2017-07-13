@@ -29,8 +29,10 @@
       <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
       <%= f.label :email, :class => 'span6 right' %>
       <%= f.text_field :email, class: "span6 right", placeholder: "Email" %>
-      <%= f.label :created_at_date, :class => 'span6 right' %>
-      <%= f.text_field :created_at_date, class: "span6 date_picker right", placeholder: "Created at" %>
+      <%= f.label :created_at_date_gt, 'Created at from', :class => 'span6 right' %>
+      <%= f.text_field :created_at_date_gt, class: "span6 date_picker right", placeholder: "Created greater than" %>
+      <%= f.label :created_at_date_lt, 'Created at to', :class => 'span6 right' %>
+      <%= f.text_field :created_at_date_lt, class: "span6 date_picker right", placeholder: "Created lower than" %>
       <%= f.label :confirmed_at_date, :class => 'span6 right' %>
       <%= f.text_field :confirmed_at_date, class: "span6 date_picker right", placeholder: "Confirmed at" %>
       <div class="btn-group span6 right">
