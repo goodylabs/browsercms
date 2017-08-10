@@ -4,12 +4,26 @@
   <%= form_for @search_filter, url: engine(content_type).url_for({}), html: {class: 'form-search'}, method: :get do |f| %>
     <% if content_type.name == "Freshminds::Advertisement" %>
       <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
+      
       <%= f.label :responsible_person_email, :class => 'span6 right' %>
       <%= f.select(:responsible_person_email, Freshminds::Advertisement.pluck(:responsible_person_email).uniq.reject!(&:blank?),{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
+      
       <%= f.label :filled, :class => 'span6 right' %>
-      <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
+      <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Filled" }) %>
+      
+      <%= f.label :featured, :class => 'span6 right' %>
+      <%= f.select(:featured, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Featured" }) %>
+      
+      <%= f.label :on_homepage, :class => 'span6 right' %>
+      <%= f.select(:on_homepage, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "On homepage" }) %>
+      
       <%= f.label :job_type_id, :class => 'span6 right' %>
       <%= f.collection_select(:job_type_id, Freshminds::JobType.all,:id,:name,{ :include_blank => true }, { :class => 'span6 right', :label => "Job type" }) %>
+      
+      <%= f.label :created_at_date_gt, 'Created at from', :class => 'span6 right' %>
+      <%= f.text_field :created_at_date_gt, class: "span6 date_picker right", placeholder: "Created greater than" %>
+      <%= f.label :created_at_date_lt, 'Created at to', :class => 'span6 right' %>
+      <%= f.text_field :created_at_date_lt, class: "span6 date_picker right", placeholder: "Created lower than" %>
       <div class="btn-group span6 right">
         <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
       </div>
