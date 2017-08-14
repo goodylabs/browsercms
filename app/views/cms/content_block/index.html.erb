@@ -1,33 +1,33 @@
 <% use_page_title "Assets - #{content_type.display_name_plural}" %>
 <div class="padded row-fluid clearfix">
-  <h1 class="span3">Assets</h1>
   <%= form_for @search_filter, url: engine(content_type).url_for({}), html: {class: 'form-search'}, method: :get do |f| %>
     <% if content_type.name == "Freshminds::Advertisement" %>
-      <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
-      
-      <%= f.label :responsible_person_email, :class => 'span6 right' %>
-      <%= f.select(:responsible_person_email, Freshminds::Advertisement.pluck(:responsible_person_email).uniq.reject!(&:blank?),{ :include_blank => true }, { :class => 'span6 right', :label => "Responsible person's email" }) %>
-      
-      <%= f.label :filled, :class => 'span6 right' %>
-      <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Filled" }) %>
-      
-      <%= f.label :featured, :class => 'span6 right' %>
-      <%= f.select(:featured, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "Featured" }) %>
-      
-      <%= f.label :on_homepage, :class => 'span6 right' %>
-      <%= f.select(:on_homepage, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span6 right', :label => "On homepage" }) %>
-      
-      <%= f.label :job_type_id, :class => 'span6 right' %>
-      <%= f.collection_select(:job_type_id, Freshminds::JobType.all,:id,:name,{ :include_blank => true }, { :class => 'span6 right', :label => "Job type" }) %>
-      
-      <%= f.label :created_at_date_gt, 'Created at from', :class => 'span6 right' %>
-      <%= f.text_field :created_at_date_gt, class: "span6 date_picker right", placeholder: "Created greater than" %>
-      <%= f.label :created_at_date_lt, 'Created at to', :class => 'span6 right' %>
-      <%= f.text_field :created_at_date_lt, class: "span6 date_picker right", placeholder: "Created lower than" %>
-      <div class="btn-group span6 right">
-        <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
+      <h1 class="span12">Assets</h1>
+      <div class="column-50">
+        <%= f.label :name, :class => 'span10' %>
+        <%= f.text_field :name, class: "span10" %>
+        <%= f.label :responsible_person_email, :class => 'span10' %>
+        <%= f.select(:responsible_person_email, Freshminds::Advertisement.pluck(:responsible_person_email).uniq.reject!(&:blank?),{ :include_blank => true }, { :class => 'span10', :label => "Responsible person's email" }) %>
+        <%= f.label :filled, :class => 'span10' %>
+        <%= f.select(:filled, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span10', :label => "Filled" }) %>
+        <%= f.label :featured, :class => 'span10' %>
+        <%= f.select(:featured, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span10', :label => "Featured" }) %>
+      </div>
+      <div class="column-50">
+        <%= f.label :on_homepage, :class => 'span10' %>
+        <%= f.select(:on_homepage, [['yes',true], ['no',false]],{ :include_blank => true }, { :class => 'span10', :label => "On homepage" }) %>
+        <%= f.label :job_type_id, :class => 'span10' %>
+        <%= f.collection_select(:job_type_id, Freshminds::JobType.all,:id,:name,{ :include_blank => true }, { :class => 'span10', :label => "Job type" }) %>
+        <%= f.label :created_at_date_gt, 'Created at from', :class => 'span10' %>
+        <%= f.text_field :created_at_date_gt, class: "span10 date_picker", placeholder: "Created greater than" %>
+        <%= f.label :created_at_date_lt, 'Created at to', :class => 'span10' %>
+        <%= f.text_field :created_at_date_lt, class: "span10 date_picker", placeholder: "Created lower than" %>
+        <div class="btn-group span10 top-buttons">
+          <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
+        </div>
       </div>
     <% elsif content_type.name == "Freshminds::OnesToWatch" %>
+      <h1 class="span3">Assets</h1>
       <%= f.label :first_name, :class => 'span6 right' %>
       <%= f.text_field :first_name, class: "span6 search-query right", placeholder: "First name" %>
       <%= f.label :surname, :class => 'span6 right' %>
@@ -40,6 +40,7 @@
         <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
       </div>
     <% elsif content_type.name == "Freshminds::JobAlertsSubscriber" %>
+      <h1 class="span3">Assets</h1>
       <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
       <%= f.label :email, :class => 'span6 right' %>
       <%= f.text_field :email, class: "span6 right", placeholder: "Email" %>
@@ -53,6 +54,7 @@
         <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
       </div>
     <% elsif content_type.name == "Freshminds::CallBackRequest" %>
+      <h1 class="span3">Assets</h1>
       <%= f.text_field :name, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
       <%= f.label :created_at_date_gt, 'Created at from', :class => 'span6 right' %>
       <%= f.text_field :created_at_date_gt, class: "span6 date_picker right", placeholder: "Created greater than" %>
@@ -66,6 +68,7 @@
         <%= f.submit "Filter!", :class => 'span3 right btn btn-small btn-primary primary-ct' %>  
       </div>
     <% else %>
+      <h1 class="span3">Assets</h1>
       <%= f.text_field :term, class: "span6 search-query right", placeholder: "Search #{content_type.display_name_plural}" %>
     <% end %>
   <% end %>
@@ -73,7 +76,9 @@
     <%= link_to 'Download all CVs', "/ones_to_watches/download_files", :class => 'span3 btn btn-small btn-primary primary-ct' %>
   <% end %>
   <% if content_type.name == "Freshminds::Advertisement" %>
-    <a href="<%= request.url.gsub('/advertisements','/advertisements.csv') %>" class='span3 btn btn-small btn-primary primary-ct'>Download CSV</a>
+    <div class="column-50">
+      <a href="<%= request.url.gsub('/advertisements','/advertisements.csv') %>" class='span10 btn btn-small btn-primary primary-ct'>Download CSV</a>
+    </div>
   <% end %>
 </div>
 
