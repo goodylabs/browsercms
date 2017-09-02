@@ -20,6 +20,7 @@ module Cms
                 <tr>
                   <td style='padding:30px'>
                     <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                      <tr><td>Form name: <strong>#{@form.name}</strong></td></tr>
                       #{@entry.data_columns.map{ |k,v| "<tr><td align='justify;'>#{k.humanize}: <strong>#{v}</strong></td></tr>"}.join}
                       <tr>
                         <td>
