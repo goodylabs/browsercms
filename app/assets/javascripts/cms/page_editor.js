@@ -8,7 +8,9 @@
 
 // Since we are within the page editing iframe, add a 'target=_top' to all links so they refresh the entire page.
 jQuery(function($){
-  $('a').attr('target', '_top');
+  if(!$('a').attr('target')) {
+    $('a').attr('target', '_top');  
+  }
 });
 
 jQuery(function($){
