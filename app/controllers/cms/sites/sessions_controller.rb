@@ -7,6 +7,8 @@ module Cms
       helper AuthenticationHelper
       helper UiElementsHelper
 
+      rescue_from ActionController::UnknownFormat, with: :raise_not_found
+
       template :default
 
       def new
@@ -14,6 +16,12 @@ module Cms
         super
       end
 
+      protected
+
+        def raise_not_found
+          Rails.logger.error 'Unknown format exception caught!'
+          redirect_to '/'
+        end  
 
     end
   end
