@@ -75,9 +75,10 @@
   <% if content_type.name == "Freshminds::OnesToWatch" %>
     <%= link_to 'Download all CVs', "/ones_to_watches/download_files", :class => 'span3 btn btn-small btn-primary primary-ct' %>
   <% end %>
-  <% if content_type.name == "Freshminds::Advertisement" %>
+  <% if ["Freshminds::Advertisement", "Freshminds::CallBackRequest"].include?(content_type.name) %>
     <div class="column-50">
-      <a href="<%= request.url.gsub('/advertisements','/advertisements.csv') %>" class='span10 btn btn-small btn-primary primary-ct'>Download CSV</a>
+      <% _url = content_type.name.split('::').last.pluralize.underscore %>
+      <a href='<%= request.url.gsub("/#{_url}","/#{_url}.csv") %>' class='span10 btn btn-small btn-primary primary-ct'>Download CSV</a>
     </div>
   <% end %>
 </div>
@@ -248,7 +249,8 @@
   <% if !@search_filter.term.blank? && @blocks.size == 0 %>
     <div class="pagination">No results found for '<%= @search_filter.term %>'</div>
   <% elsif @blocks.total_pages > 1 %>
-    <%= render_pagination @blocks, content_type, :order => params[:order], "search_filter[term]" => @search_filter.term %>
+    <% _opts = params[:search_filter].present? ? { order: params[:order] }.merge!(params[:search_filter].map{ |key, value| ["search_filter[#{key}]", @search_filter.send(key) ] }.to_h) : { order: params[:order] } %>
+    <%= render_pagination @blocks, content_type, _opts %>
   <% end %>
 
 </div>
